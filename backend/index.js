@@ -18,29 +18,9 @@ mongoose
         })
     })
 
-// index.get('/', (req, res) => {
-//     res.send('Hello World !')
-// })
-
-// index.post('/', (req, res) => {
-//     res.send('Got a POST request')
-// })
-//
-// index.put('/:userId', (req, res) => {
-//     res.send('Got a PUT request at /user')
-// })
-//
-// index.delete('/:userId', (req, res) => {
-//     res.send('Got a DELETE request at /user')
-// })
-//
-// index.get('/random', (req, res) => {
-//     res.send('random.text')
-// })
-//
-// index.get('/users/:userId/books/:bookId', (req, res) => {
-//     res.send(req.params)
-// })
+index.get('/', (req, res) => {
+    res.send('Welcome to my To Do List web app !')
+})
 
 index.listen(port, () => {
     console.log(`App listening on port ${port}`)

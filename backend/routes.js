@@ -57,6 +57,17 @@ router.delete("/todos/:id", async (req, res) => {
     }
 })
 
+// Get todos which are done
+router.get("/todos/done", async (req, res) => {
+        const todosDone = await Todo.find( { done: true } )
+        res.send (todosDone)
+})
+
+// Get todos which are not done yet
+router.get("/todos/ongoing", async (req, res) => {
+    const todosDone = await Todo.find( { done: false } )
+    res.send (todosDone)
+})
 
 
 module.exports = router
