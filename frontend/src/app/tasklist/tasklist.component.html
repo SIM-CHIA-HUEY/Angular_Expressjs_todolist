@@ -1,0 +1,22 @@
+<h3>Task list</h3>
+
+<div class="tab">
+
+    <button id="all" (click)="tabChange('all')">ALL</button>
+    <button id="todo" (click)="tabChange('todo')">TO-DO</button>
+    <button id="done" (click)="tabChange('done')">DONE</button>
+
+
+  <div class="content">
+    <div class="content-value" *ngIf="id === 'all'">
+      <app-get-all-tasks></app-get-all-tasks>
+    </div>
+    <div class="content-value" *ngIf="id === 'todo'">
+      <app-get-todo-tasks></app-get-todo-tasks>
+    </div>
+    <div class="content-value" *ngIf="id === 'done'">
+      <app-get-done-tasks></app-get-done-tasks>
+    </div>
+  </div>
+
+</div>

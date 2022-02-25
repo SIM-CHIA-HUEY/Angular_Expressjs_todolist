@@ -10,6 +10,8 @@ mongoose
     .connect("mongodb://127.0.0.1:27017/todolist", { useNewUrlParser: true })
     .then(() => {
         const app = express()
+        const cors = require('cors');
+        app.use(cors());
         app.use(express.json())
         app.use("/api", routes)
 

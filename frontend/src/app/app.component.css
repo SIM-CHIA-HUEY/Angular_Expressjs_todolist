@@ -19,9 +19,25 @@
   grid-row: 1;
 }
 
+@media screen and (max-width: 575px) {
+  .home-card {
+    grid-template-columns: repeat(1, 1fr);
+  }
+
+  .task-list-card {
+    grid-column: 1 / 1;
+  }
+
+  .new-task card {
+    grid-column: 1 / 1;
+  }
+}
+
 .footer {
   font-family: Roboto, sans-serif;
   font-size: small;
   color: #26ADE4;
   text-align: center;
 }
+
+
