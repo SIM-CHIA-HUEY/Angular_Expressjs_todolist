@@ -9,6 +9,7 @@ import { NewtaskComponent } from './newtask/newtask.component';
 import { GetAllTasksComponent } from './get-all-tasks/get-all-tasks.component';
 import { GetDoneTasksComponent } from './get-done-tasks/get-done-tasks.component';
 import { GetTodoTasksComponent } from './get-todo-tasks/get-todo-tasks.component';
+import {FormsModule} from "@angular/forms";
 
 @NgModule({
   declarations: [
@@ -20,10 +21,11 @@ import { GetTodoTasksComponent } from './get-todo-tasks/get-todo-tasks.component
     GetDoneTasksComponent,
     GetTodoTasksComponent
   ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule
-  ],
+    imports: [
+        BrowserModule,
+        AppRoutingModule,
+        FormsModule
+    ],
   providers: [],
   bootstrap: [AppComponent]
 })

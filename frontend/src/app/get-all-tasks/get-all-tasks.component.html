@@ -1,6 +1,8 @@
 <ul>
   <li *ngFor="let todo of todosArray; index as i">
+    <input type="checkbox" [(ngModel)]="todo.done" (change)="onCheckboxChange(todo._id)"/>
     <p>{{todo.done}}</p>
     <p>{{todo.content}}</p>
+    <button (click)="deleteTodos(todo._id)">Delete</button>
   </li>
 </ul>

@@ -17,7 +17,7 @@ export class GetDoneTasksComponent implements OnInit {
   }
 
   async getDoneTasks() {
-    const res = await axios.get('http://localhost:5000/api/todos/done')
+    const res = await axios.get('http://localhost:5000/api/done')
     this.doneTasksArray = res.data
     // console.log(this.doneTasksArray)
   }

@@ -14,6 +14,13 @@ router.get("/todos", async (req, res) => {
 
 })
 
+// Get by ID
+router.get("/todos/:id", async (req, res) => {
+        const todoById = await Todo.findOne({ _id: req.params.id })
+        res.send (todoById)
+
+})
+
 // Create a new todo
 router.post("/todos", async (req, res) => {
     const todo = new Todo({
@@ -49,24 +56,22 @@ router.patch("/todos/:id", async (req, res) => {
 router.delete("/todos/:id", async (req, res) => {
     try {
         await Todo.deleteOne({ _id: req.params.id })
-        res.status(204).send()
-        res.send("This todo has been deleted")
+        res.status(200).send()
     } catch {
         res.status(404)
-        res.send({ error: "This todo doesn't exist!" })
     }
 })
 
 // Get todos which are done
-router.get("/todos/done", async (req, res) => {
+router.get("/done", async (req, res) => {
         const todosDone = await Todo.find( { done: true } )
         res.send (todosDone)
 })
 
 // Get todos which are not done yet
-router.get("/todos/ongoing", async (req, res) => {
-    const todosDone = await Todo.find( { done: false } )
-    res.send (todosDone)
+router.get("/ongoing", async (req, res) => {
+    const todosOngoing = await Todo.find( { done: false } )
+    res.send (todosOngoing)
 })
 
 

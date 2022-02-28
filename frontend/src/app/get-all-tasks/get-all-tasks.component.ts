@@ -9,7 +9,7 @@ import axios from "axios";
 export class GetAllTasksComponent implements OnInit {
 
   todosArray: any;
-  // allTodos: any = [];
+  doneCheck: any;
 
   constructor() { }
 
@@ -20,18 +20,23 @@ export class GetAllTasksComponent implements OnInit {
   async getTodos() {
     const res = await axios.get('http://localhost:5000/api/todos')
     this.todosArray = res.data
-    console.log(this.todosArray)
-    // let i;
-    // for (i = 0; i < this.todosArray.length; i++) {
-    //   console.log(this.todosArray[i])
-    //   // this.allTodos.push(this.todosArray[i])
-    // }
-    // console.log(this.todosArray)
-
-    // fetch("http://localhost:5000/api/todos")
-    //   .then(response => response.json())
-    //   .then(result => console.log(result))
-    //   .catch(error => console.log('error', error));
   }
+
+  async onCheckboxChange(id: any) {
+    const res = await axios.get('http://localhost:5000/api/todos/' + id)
+    this.doneCheck = res.data.done
+
+    this.doneCheck = !this.doneCheck;
+
+    await axios.patch('http://localhost:5000/api/todos/' + id, {
+      "done": this.doneCheck.toString()
+    })
+  }
+
+  async deleteTodos(id: any) {
+    await axios.delete('http://localhost:5000/api/todos/' + id)
+    window.location.reload();
+  }
+
 
 }

@@ -17,7 +17,7 @@ export class GetTodoTasksComponent implements OnInit {
   }
 
   async getTodoTasks() {
-    const res = await axios.get('http://localhost:5000/api/todos/ongoing')
+    const res = await axios.get('http://localhost:5000/api/ongoing')
     this.todoTasksArray = res.data
     // console.log(this.todoTasksArray)
   }
