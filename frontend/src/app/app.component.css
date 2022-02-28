@@ -1,42 +1,48 @@
 .home-card {
   margin: 30px 70px;
-  padding: 0 50px;
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  grid-gap: 10px;
-  grid-auto-rows: minmax(100px, auto);
+  padding: 0 30px;
   background-color: #FFFFFF;
   box-shadow: 0px 1px 6px 2px rgba(68,68,68,0.2);
 }
 
 .list-card {
-  grid-column: 1 / 2;
-  grid-row: 1;
-  padding: 50px;
-  border-right-style: solid ;
-  border-width: 1px;
-  border-color: #BBBBBB;
+  float: right !important;
 }
 
-.new-card {
-  grid-column: 2 / 2;
-  grid-row: 1;
-  padding: 50px;
-
+.column {
+  float: left;
+  width: 40%;
+  padding: 40px;
+}
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
 }
 
-@media screen and (max-width: 575px) {
+@media screen and (max-width: 1000px) {
   .home-card {
-    grid-template-columns: repeat(1, 1fr);
+    margin: 30px 20px;
+    padding: 0 20px;
+    width: 80%;
+    background-color: #FFFFFF;
+    box-shadow: 0px 1px 6px 2px rgba(68,68,68,0.2);
   }
 
   .list-card {
-    grid-column: 1 / 1;
+    float: left !important;
   }
 
-  .new-card {
-    grid-column: 1 / 1;
+  .column {
+    width: 90%;
+    padding: 10px;
   }
+  .row:after {
+    content: "";
+    display: table;
+    clear: both;
+  }
+
 }
 
 .footer {

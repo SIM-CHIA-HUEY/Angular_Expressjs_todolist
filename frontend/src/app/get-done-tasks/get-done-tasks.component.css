@@ -9,7 +9,6 @@ li {
 .introduction {
   color: #BBBBBB;
   padding-bottom: 30px;
-
 }
 
 .trash-button {
@@ -37,18 +36,18 @@ li {
 }
 .column-7 {
   float: left;
-  width: 80%;
-  padding: 0;
+  width: 70%;
+  padding: 0 10% 0 0;
   margin: 0;
 }
 .row {
   margin: 20px 20px 20px 0;
-  padding-bottom: 10px;
+  width: 100%;
+  padding-bottom: 20px;
   border-bottom-style: solid ;
   border-width: 1px;
   border-color: #BBBBBB;
 }
-/* Clear floats after the columns */
 .row:after {
   content: "";
   display: table;
