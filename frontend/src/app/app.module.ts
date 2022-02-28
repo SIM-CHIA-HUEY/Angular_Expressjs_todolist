@@ -10,6 +10,7 @@ import { GetAllTasksComponent } from './get-all-tasks/get-all-tasks.component';
 import { GetDoneTasksComponent } from './get-done-tasks/get-done-tasks.component';
 import { GetTodoTasksComponent } from './get-todo-tasks/get-todo-tasks.component';
 import {FormsModule} from "@angular/forms";
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 @NgModule({
   declarations: [
@@ -24,9 +25,11 @@ import {FormsModule} from "@angular/forms";
     imports: [
         BrowserModule,
         AppRoutingModule,
-        FormsModule
+        FormsModule,
+        FontAwesomeModule,
     ],
   providers: [],
+  // declarations: [AppComponent],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

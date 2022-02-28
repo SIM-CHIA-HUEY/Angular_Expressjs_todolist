@@ -1,0 +1,28 @@
+h3 {
+  font-size: xx-large;
+}
+
+.tab-button {
+  border-style: none;
+  background-color: #FFFFFF;
+  font-size: medium;
+  font-weight: bold;
+  color: #BBBBBB;
+  padding-right: 50px;
+  padding-bottom: 10px;
+  border-bottom-style: solid;
+  border-width: 2px;
+  border-color: #BBBBBB;
+}
+
+.tab-button:focus {
+  outline: none;
+  color: #26ADE4;
+  border-bottom-style: solid;
+  border-color: #26ADE4;
+  border-width: 5px;
+}
+
+@media screen and (max-width: 575px) {
+
+}

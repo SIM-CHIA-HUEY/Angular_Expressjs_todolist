@@ -1,13 +1,16 @@
 import { Component, OnInit } from '@angular/core';
 import axios from "axios";
+import { faTrash } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-get-all-tasks',
   templateUrl: './get-all-tasks.component.html',
   styleUrls: ['./get-all-tasks.component.css']
 })
+
 export class GetAllTasksComponent implements OnInit {
 
+  faTrash = faTrash;
   todosArray: any;
   doneCheck: any;
 

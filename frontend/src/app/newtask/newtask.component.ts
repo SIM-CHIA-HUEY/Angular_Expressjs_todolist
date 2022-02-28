@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import axios from "axios";
+import { faPlus } from '@fortawesome/free-solid-svg-icons';
+
 
 @Component({
   selector: 'app-newtask',
@@ -14,30 +16,23 @@ export class NewtaskComponent implements OnInit {
 
   isValidForm = true;
 
+  faPlus = faPlus ;
 
   constructor() { }
 
   ngOnInit(): void {
   }
 
-  submit () {
+  async submit () {
     if(this.isValidForm) {
-      // console.log(this.form);
-      axios.post('http://localhost:5000/api/todos', {
+      await axios.post('http://localhost:5000/api/todos', {
         "content": this.form.todoContent,
         "done": "false"
       })
-
     }
     window.location.reload();
 
   }
 
-  // async createTodo () {
-  //   await axios.post('http://localhost:5000/api/todos', {
-  //     "content": this.form.todoContent,
-  //     "done": "false"
-  //   })
-  // }
 
 }

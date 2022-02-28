@@ -1,0 +1,43 @@
+h3 {
+  font-size: xx-large;
+}
+
+.content-textarea {
+  width: 90%;
+  height: 50px;
+  padding: 0 15px;
+  color: #BC26E4;
+  font-size: medium;
+}
+.content-textarea:focus {
+  outline: none;
+}
+
+.danger-alert {
+  color: #E4264E;
+}
+
+.form-buttons {
+  margin-top: 30px;
+}
+
+.button-plus {
+  padding: 10px 50px;
+  background-color: #BC26E4;
+  border-style: none;
+  border-radius: 5px;
+  color: #FFFFFF;
+  font-size: medium;
+  font-weight: bold;
+}
+
+.new-task-image {
+  justify-items: center;
+  /*left: 50%;*/
+}
+.illustration {
+  padding-top: 100px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
