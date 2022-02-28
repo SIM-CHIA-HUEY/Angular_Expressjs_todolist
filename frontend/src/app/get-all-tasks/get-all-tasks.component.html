@@ -1,0 +1,26 @@
+<div>
+  <p class="introduction">This is a list of all my to-do tasks.</p>
+
+  <ul>
+    <li *ngFor="let todo of todosArray; index as i">
+      <div class="row">
+
+        <div class="column-1">
+          <input type="checkbox" [(ngModel)]="todo.done" (change)="onCheckboxChange(todo._id)" class="checkbox"/>
+        </div>
+
+        <div class="column-7">
+          {{todo.content}}
+        </div>
+
+        <div class="column-1">
+          <button (click)="deleteTodos(todo._id)" class="trash-button">
+            <fa-icon [icon]="faTrash"></fa-icon>
+          </button>
+        </div>
+
+      </div>
+    </li>
+  </ul>
+</div>
+
