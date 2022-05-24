@@ -12,6 +12,12 @@ import { GetTodoTasksComponent } from './get-todo-tasks/get-todo-tasks.component
 import {FormsModule} from "@angular/forms";
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
+import { HttpClientModule } from '@angular/common/http';
+import { StoreModule } from '@ngrx/store';
+import { reducers, metaReducers } from './reducers';
+
+import { counterReducer } from './counter.reducer';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -27,6 +33,12 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
         AppRoutingModule,
         FormsModule,
         FontAwesomeModule,
+        HttpClientModule,
+        StoreModule.forRoot(
+          // reducers, 
+          // { metaReducers },
+          { count: counterReducer }
+        ),
     ],
   providers: [],
   // declarations: [AppComponent],

@@ -40,6 +40,7 @@ h3 {
   color: #FFFFFF;
   font-size: medium;
   font-weight: bold;
+  cursor: pointer;
 }
 
 .new-task-image {
@@ -50,6 +51,11 @@ h3 {
   display: block;
   margin-left: auto;
   margin-right: auto;
+}
+
+.text-add-task {
+  text-align: center;
+  padding: 10px;
 }
 
 @media screen and (max-width: 1000px) {

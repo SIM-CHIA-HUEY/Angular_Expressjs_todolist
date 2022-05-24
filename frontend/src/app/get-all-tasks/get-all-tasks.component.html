@@ -1,5 +1,5 @@
 <div>
-  <p class="introduction">This is a list of all my to-do tasks.</p>
+  <p class="introduction">I have a total of {{ count$ | async }} to-do tasks going on currecntly.</p>
 
   <ul>
     <li *ngFor="let todo of todosArray; index as i">
