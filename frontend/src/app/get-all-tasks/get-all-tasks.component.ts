@@ -16,6 +16,8 @@ import { Store } from '@ngrx/store';
 
 export class GetAllTasksComponent implements OnInit {
 
+  // ----- STORE + reducers and actions files. Objective : to get final state's $count from the Store -----
+  // We initialize an empty variable here that'll stock the value from the Store : 
   count$: Observable<number>;
 
   faTrash = faTrash;
@@ -23,7 +25,11 @@ export class GetAllTasksComponent implements OnInit {
   doneCheck: any;
 
   constructor(
-    private todosService: TodosService, private store: Store<{ count: number }>) { 
+    private todosService: TodosService, 
+    private store: Store<{ count: number }>
+    ) 
+    { 
+    // ----- STORE : Use with SELECT + store + reducers and actions files. Objective : to get final state's $count from the Store -----
       this.count$ = store.select('count'); 
     }
 
@@ -31,37 +37,30 @@ export class GetAllTasksComponent implements OnInit {
     this.getTodos();
   }
 
+  // ----- API GET 2 : Fetch all to-dos with service, and in component : -----
   async getTodos() {
     this.todosService.getAllTodos().subscribe(data => {
-      // console.log(data);
       this.todosArray = data;
 
-      // Use with store to increment +1 on the numbers of todo tasks
+      // ----- STORE : Use with DISPATCH + store + counters and actions files. Objective : to increment $count each time a todo task is added -----
       this.todosArray.forEach((element:any) => {
         console.log(element._id)
         this.store.dispatch(increment());
-
       });
     })
 
-
   }
-  // Fetch all to-dos without service, only in component : 
+
+  // ----- API GET 1 : Fetch all to-dos without service, only in component with AXIOS : -----
   // async getTodos() {
   //   const res = await axios.get('http://localhost:5000/api/todos')
   //   this.todosArray = res.data
   // }
 
-  // increment() {
-  //   this.store.dispatch(increment());
-  // }
-
   async onCheckboxChange(id: any) {
     const res = await axios.get('http://localhost:5000/api/todos/' + id)
     this.doneCheck = res.data.done
-
     this.doneCheck = !this.doneCheck;
-
     await axios.patch('http://localhost:5000/api/todos/' + id, {
       "done": this.doneCheck.toString()
     })

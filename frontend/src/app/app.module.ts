@@ -16,7 +16,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { StoreModule } from '@ngrx/store';
 import { reducers, metaReducers } from './reducers';
 
-import { counterReducer } from './counter.reducer';
+import { counterReducer } from './reducers/counter.reducer';
 
 @NgModule({
   declarations: [
