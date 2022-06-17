@@ -1,27 +1,25 @@
+@import '../../scss/base.scss';
+
 ul {
   padding: 0;
+  margin: 0;
 }
 
 li {
   list-style: none;
 }
 
-.introduction {
-  color: #BBBBBB;
-  padding-bottom: 30px;
-}
-
 .trash-button {
   border-style: solid;
   border-width: 1px;
   border-radius: 5px;
-  border-color: #26ADE4;
+  border-color: $base-blue;
   padding: 5px 10px;
   vertical-align: middle;
   float: right !important;
-  color: #26ADE4;
+  color: $base-blue;
   cursor: pointer;
-  background: linear-gradient(to right, #26ADE4 50%, #FFFFFF 50%);
+  background: linear-gradient(to right, $base-violet 50%, #FFFFFF 50%);
   background-size: 200% 100%;
   background-position: right bottom;
   transition: all .2s ease-out;
@@ -30,19 +28,119 @@ li {
 .trash-button:hover {
   color: #FFFFFF;
   background-position: left bottom;
-
+  border-color: $base-violet;
+  transition: all .2s ease;
+  border-width: 2px;
 }
 
-.checkbox {
-  vertical-align: middle;
+
+.row:hover .trash-button {
+  color: #FFFFFF;
+  background-position: left bottom;
+  border-color: $base-violet;
+  transition: all .2s ease;}
+
+// .checkbox {
+//   vertical-align: middle;
+//   background-color: red;
+//   border-color: red !important;
+// }
+
+
+// input[type=checkbox] {
+//   position: relative;
+//   margin: 0 !important;
+//   cursor: pointer;
+// }
+// input[type=checkbox]:before {
+//   content: "";
+//   display: block;
+//   position: absolute;
+//   width: 26px;
+//   height: 24px;
+//   top: 0;
+//   left: 0;
+//   border: 1px solid $base-violet;
+//   border-radius: 6px;
+//   background-color: #FFFFFF;
+// }
+// input[type=checkbox]:checked:after {
+//   content: "";
+//   display: block;
+//   width: 5px;
+//   height: 10px;
+//   border: solid black;
+//   border-width: 0 2px 2px 0;
+//   -webkit-transform: rotate(45deg);
+//   -ms-transform: rotate(45deg);
+//   transform: rotate(45deg);
+//   position: absolute;
+//   top: 2px;
+//   left: 8px;
+// }
+
+// Problems : above is hiding checkbox poorly, maybe they dont have same SIZE / margin padding
+
+input[type='checkbox'] {
+  position: relative;
+  cursor: pointer;
+  margin: 20px;
 }
+input[type='checkbox']:before {
+  content: '';
+  display: block;
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  top: 50%;
+  left: 50%;
+  background-color: inherit;
+  outline: 1px rgba(255, 255, 255, 0.2) solid;
+  transform: translate(-50%, -50%);
+}
+input[type='checkbox']:checked:before {     
+  content: '';
+  display: block;
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  top: 50%;
+  left: 50%;
+  background-color: inherit;
+  outline: 1px rgba(255, 255, 255, 0.2) solid;
+  transform: translate(-50%, -50%);
+  box-shadow: 0px 0px 4px 1px #fff;
+}
+input[type='checkbox']:checked:after {
+  content: '';
+  display: block;
+  width: 6px;
+  height: 10px;
+  border: solid;
+  border-width: 0 2px 2px 0;
+  border-color: inherit;
+  position: absolute;
+  top: 35%;
+  left: 50%;
+  transform: translate(-50%, -50%) rotate(45deg);
+}
+
+
+
+
+
+
+
+
+
+
 
 .column-1 {
   float: left;
   width: 10%;
   padding: 0;
   margin: 0;
-  justify-content: center;
+  justify-content: start;
 }
 .column-7 {
   float: left;
@@ -56,7 +154,7 @@ li {
   padding-bottom: 20px;
   border-bottom-style: solid ;
   border-width: 1px;
-  border-color: #BBBBBB;
+  border-color: $base-blue;
 }
 .row:after {
   content: "";

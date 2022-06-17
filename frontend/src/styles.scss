@@ -3,13 +3,13 @@
 
 /*@import '~bootstrap/dist/css/bootstrap.min.css';*/
 
-
+@import './app/scss/base.scss';
 
 html, body { height: 100%; width: 100%;}
 
 body {
   margin: 0;
-  font-family: Roboto, "Helvetica Neue", sans-serif;
-  background-color: #E5E5E5;
+  font-family: $font-stack;
+  background-color: $color-cloud;
 }
 
