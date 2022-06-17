@@ -1,0 +1,24 @@
+<div class="container">
+  <h3>Tasks List</h3>
+
+  <div class="tab">
+
+    <button autofocus id="all" (click)="tabChange('all')" class="tab-button">ALL</button>
+    <button id="todo" (click)="tabChange('todo')" class="tab-button">TO-DO</button>
+    <button id="done" (click)="tabChange('done')" class="tab-button">DONE</button>
+
+    <div class="content">
+      <div class="content-value" *ngIf="id === 'all'">
+        <app-get-all-tasks></app-get-all-tasks>
+      </div>
+      <div class="content-value" *ngIf="id === 'todo'">
+        <app-get-todo-tasks></app-get-todo-tasks>
+      </div>
+      <div class="content-value" *ngIf="id === 'done'">
+        <app-get-done-tasks></app-get-done-tasks>
+      </div>
+    </div>
+
+  </div>
+</div>
+
