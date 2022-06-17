@@ -15,7 +15,7 @@ import { TodoPayloadAddNew } from 'src/app/models/todo.model';
 @Component({
   selector: 'app-newtask',
   templateUrl: './newtask.component.html',
-  styleUrls: ['./newtask.component.css']
+  styleUrls: ['./newtask.component.scss']
 })
 export class NewtaskComponent implements OnInit {
 

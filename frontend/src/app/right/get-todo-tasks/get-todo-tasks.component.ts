@@ -8,7 +8,7 @@ import { TodoPayload, TodoPayloadUpdateStatus } from 'src/app/models/todo.model'
 @Component({
   selector: 'app-get-todo-tasks',
   templateUrl: './get-todo-tasks.component.html',
-  styleUrls: ['./get-todo-tasks.component.css']
+  styleUrls: ['./get-todo-tasks.component.scss']
 })
 export class GetTodoTasksComponent implements OnInit {
 

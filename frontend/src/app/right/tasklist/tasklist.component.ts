@@ -4,7 +4,7 @@ import axios from "axios";
 @Component({
   selector: 'app-tasklist',
   templateUrl: './tasklist.component.html',
-  styleUrls: ['./tasklist.component.css']
+  styleUrls: ['./tasklist.component.scss']
 })
 export class TasklistComponent implements OnInit {
 
