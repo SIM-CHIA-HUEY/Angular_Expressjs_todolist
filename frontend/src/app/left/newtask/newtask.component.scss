@@ -1,3 +1,5 @@
+@import '../../scss/base.scss';
+
 .container {
   margin: 0;
   padding: 0;
@@ -9,10 +11,10 @@ h3 {
 }
 
 .content-textarea {
-  width: 100%;
+  width: 90%;
   height: 50px;
   padding: 0 15px;
-  color: #BC26E4;
+  color: $base-violet;
   font-size: medium;
 }
 .content-textarea:focus {
@@ -34,12 +36,14 @@ h3 {
 
 .button-plus {
   padding: 10px 50px;
-  background-color: #BC26E4;
+  background-color: $base-violet;
   border-style: none;
   border-radius: 5px;
   color: #FFFFFF;
   font-size: medium;
   font-weight: bold;
+  display: block;
+  width: 100%;
   cursor: pointer;
 }
 

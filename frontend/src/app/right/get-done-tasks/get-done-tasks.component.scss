@@ -1,3 +1,5 @@
+@import '../../scss/base.scss';
+
 ul {
   padding: 0;
 }
@@ -7,24 +9,98 @@ li {
 }
 
 .introduction {
-  color: #BBBBBB;
-  padding-bottom: 30px;
+  color: $color-boulder;
+  margin-top: 0;
+  padding-bottom: 20px;
 }
 
 .trash-button {
   border-style: solid;
   border-width: 1px;
   border-radius: 5px;
-  border-color: #26ADE4;
-  background-color: #FFFFFF;
+  border-color: $base-yellow;
   padding: 5px 10px;
   vertical-align: middle;
   float: right !important;
-  color: #26ADE4;
+  color: $base-yellow;
+  cursor: pointer;
+  background: linear-gradient(to right, $base-yellow 50%, #FFFFFF 50%);
+  background-size: 200% 100%;
+  background-position: right bottom;
+  transition: all .2s ease-out;
 }
 
-.checkbox {
-  vertical-align: middle;
+.trash-button:hover {
+  color: #FFFFFF;
+  background-position: left bottom;
+  border-color: $base-yellow;
+  transition: all .2s ease;
+  border-width: 2px;
+}
+
+.row:hover .trash-button {
+  color: #FFFFFF;
+  background-position: left bottom;
+  border-color: $base-yellow;
+  transition: all .2s ease;
+}
+
+// Checkbox
+input[type='checkbox'] {
+  position: relative;
+  cursor: pointer;
+  margin: 0;
+  background-color: $base-blue;
+  color: #FFFFFF;
+}
+input[type='checkbox']:before {
+  content: '';
+  display: block;
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  top: 50%;
+  left: 90%;
+  transform: translate(-50%, -50%);
+  background-color: #FFFFFF;
+  border-style: solid ;
+  border-color: $base-blue;
+  border-width: 2px;
+  border-radius: 5px;
+}
+input[type='checkbox']:checked:before {     
+  content: '';
+  display: block;
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  top: 50%;
+  left: 90%;
+  background-color: inherit;
+  transform: translate(-50%, -50%);
+  box-shadow: 0px 0px 4px 1px #fff;
+}
+input[type='checkbox']:checked:after {
+  content: '';
+  display: block;
+  width: 6px;
+  height: 10px;
+  border: solid;
+  border-width: 0 2px 2px 0;
+  border-color: inherit;
+  position: absolute;
+  top: 35%;
+  left: 90%;
+  transform: translate(-50%, -50%) rotate(45deg);
+}
+input[type='checkbox']:hover:before {
+  border-width: 3px;
+}
+.row:hover input[type='checkbox']:before {
+  background-color: #FFFFFF;
+  color: $base-blue;
+  transition: all .2s ease;
+  background-position: left bottom;
 }
 
 .column-1 {
@@ -37,11 +113,11 @@ li {
 .column-7 {
   float: left;
   width: 70%;
-  padding: 0 10% 0 0;
+  padding: 0 10px 0 10px;
   margin: 0;
 }
 .row {
-  margin: 20px 20px 20px 0;
+  margin: 30px 20px 20px 0;
   width: 100%;
   padding-bottom: 20px;
   border-bottom-style: solid ;
