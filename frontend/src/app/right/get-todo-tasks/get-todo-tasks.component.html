@@ -9,8 +9,13 @@
           <input type="checkbox" [(ngModel)]="todoTask.done" (change)="onCheckboxChange(todoTask._id)"/>
         </div>
 
+        <!-- <div class="column-7" >
+          {{ todoTask.content }}
+        </div> -->
         <div class="column-7">
-          {{todoTask.content}}
+          <textarea rows="2" maxlength=50
+          id="content" class="update-content" [(ngModel)]="todoTask.content" 
+          (keyup.enter)="onSubmit(todoTask._id, todoTask.content)" (blur)="contentLostFocus()"></textarea>
         </div>
 
         <div class="column-1">
@@ -23,3 +28,4 @@
     </li>
   </ul>
 </div>
+

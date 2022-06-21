@@ -41,6 +41,7 @@ export class NewtaskComponent implements OnInit {
     }
 
   ngOnInit(): void {
+    //
   }
 
   // ----- API POST 2 : Add a to-do task with service, and in component : -----

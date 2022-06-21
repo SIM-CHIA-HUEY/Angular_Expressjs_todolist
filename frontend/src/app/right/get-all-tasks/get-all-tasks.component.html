@@ -8,7 +8,9 @@
         </div>
 
         <div class="column-7">
-          {{todo.content}}
+          <textarea rows="2" maxlength=50
+          id="content" class="update-content" [(ngModel)]="todo.content" 
+          (keyup.enter)="onSubmit(todo._id, todo.content)" (blur)="contentLostFocus()"></textarea>
         </div>
 
         <div class="column-1">

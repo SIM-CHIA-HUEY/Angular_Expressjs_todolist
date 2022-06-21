@@ -8,9 +8,11 @@
         <div class="column-1">
           <input type="checkbox" [(ngModel)]="doneTask.done" (change)="onCheckboxChange(doneTask._id)"/>
         </div>
-
+        
         <div class="column-7">
-          {{doneTask.content}}
+          <textarea rows="2" maxlength=50
+          id="content" class="update-content" [(ngModel)]="doneTask.content" 
+          (keyup.enter)="onSubmit(doneTask._id, doneTask.content)" (blur)="contentLostFocus()"></textarea>
         </div>
 
         <div class="column-1">

@@ -9,12 +9,11 @@ import { NewtaskComponent } from './left/newtask/newtask.component';
 import { GetAllTasksComponent } from './right/get-all-tasks/get-all-tasks.component';
 import { GetDoneTasksComponent } from './right/get-done-tasks/get-done-tasks.component';
 import { GetTodoTasksComponent } from './right/get-todo-tasks/get-todo-tasks.component';
-import {FormsModule} from "@angular/forms";
+import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 import { HttpClientModule } from '@angular/common/http';
 import { StoreModule } from '@ngrx/store';
-
 
 @NgModule({
   declarations: [
@@ -30,6 +29,7 @@ import { StoreModule } from '@ngrx/store';
       BrowserModule,
       AppRoutingModule,
       FormsModule,
+      ReactiveFormsModule,
       FontAwesomeModule,
       HttpClientModule,
       StoreModule.forRoot({

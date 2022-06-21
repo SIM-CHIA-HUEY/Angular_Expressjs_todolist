@@ -4,7 +4,7 @@ import { faTrash } from '@fortawesome/free-solid-svg-icons';
 
 import { TodosService } from '../../services/todos.service';
 import { ActivatedRoute } from '@angular/router';
-import { TodoPayload, TodoPayloadUpdateStatus } from 'src/app/models/todo.model';
+import { TodoPayload, TodoPayloadUpdateContent, TodoPayloadUpdateStatus } from 'src/app/models/todo.model';
 
 @Component({
   selector: 'app-get-all-tasks',
@@ -56,6 +56,20 @@ export class GetAllTasksComponent implements OnInit {
     // })
   }
 
+  async onSubmit(id: string, content: string) {
+    let body: TodoPayloadUpdateContent = {
+      "content": content,
+    }
+    this.todosService.updateTodoContent(id, body).subscribe(() => {
+      this.getTodos();
+    });
+  }
+
+  async contentLostFocus() {
+    // BUG : when immediately clicked on another input, alert box loops over and over again
+    // console.log("Don't forget to press on ENTER to save changes!")
+  }
+  
   async deleteTodos(id: string) {
     this.todosService.deleteTodos(id).subscribe();
     window.location.reload();

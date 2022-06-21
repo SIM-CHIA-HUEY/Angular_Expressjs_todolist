@@ -129,3 +129,20 @@ input[type='checkbox']:hover:before {
   display: table;
   clear: both;
 }
+
+textarea {
+  resize: none;
+}
+.update-content {
+  font-size: medium;
+  font-family: $font-stack;
+  border: none;
+}
+.update-content:hover {
+  border-bottom: solid $base-blue 1px;
+}
+.update-content:focus {
+  outline: none;
+  border-bottom: solid $base-blue 1px;
+  color: $base-blue;
+}
