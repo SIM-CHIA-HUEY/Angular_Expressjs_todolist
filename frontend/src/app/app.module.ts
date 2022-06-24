@@ -11,9 +11,12 @@ import { GetDoneTasksComponent } from './right/get-done-tasks/get-done-tasks.com
 import { GetTodoTasksComponent } from './right/get-todo-tasks/get-todo-tasks.component';
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { MatTabsModule } from '@angular/material/tabs';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { HttpClientModule } from '@angular/common/http';
 import { StoreModule } from '@ngrx/store';
+import { TodosComponent } from './todos/todos.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +26,8 @@ import { StoreModule } from '@ngrx/store';
     NewtaskComponent,
     GetAllTasksComponent,
     GetDoneTasksComponent,
-    GetTodoTasksComponent
+    GetTodoTasksComponent,
+    TodosComponent,
   ],
   imports: [
       BrowserModule,
@@ -32,6 +36,8 @@ import { StoreModule } from '@ngrx/store';
       ReactiveFormsModule,
       FontAwesomeModule,
       HttpClientModule,
+      MatTabsModule,
+      BrowserAnimationsModule,
       StoreModule.forRoot({
       }),
   ],
