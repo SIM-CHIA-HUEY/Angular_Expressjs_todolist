@@ -4,11 +4,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './header/header.component';
-import { TasklistComponent } from './right/tasklist/tasklist.component';
-import { NewtaskComponent } from './left/newtask/newtask.component';
-import { GetAllTasksComponent } from './right/get-all-tasks/get-all-tasks.component';
-import { GetDoneTasksComponent } from './right/get-done-tasks/get-done-tasks.component';
-import { GetTodoTasksComponent } from './right/get-todo-tasks/get-todo-tasks.component';
+import { NewtaskComponent } from './newtask/newtask.component';
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { MatTabsModule } from '@angular/material/tabs';
@@ -22,11 +18,7 @@ import { TodosComponent } from './todos/todos.component';
   declarations: [
     AppComponent,
     HeaderComponent,
-    TasklistComponent,
     NewtaskComponent,
-    GetAllTasksComponent,
-    GetDoneTasksComponent,
-    GetTodoTasksComponent,
     TodosComponent,
   ],
   imports: [
