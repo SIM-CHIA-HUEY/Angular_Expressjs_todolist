@@ -31,38 +31,20 @@ export class TodosComponent implements OnInit {
    }
 
   changeTab(index: number) {
-    // // Tab 1 : get the on-going to-dos list
-    // if(index===1){
-    //   this.tab = 1;
-    //   this.getTodos();
-    //   console.log("1")
-    // }
-    // // Tab 2 : get the done to-dos list
-    // if(index===2){
-    //   this.tab = 2;
-    //   this.getDoneTasks();
-    //   console.log("2")
-
-    // }
-    // // Tab 3 : get all to-dos
-    // if(index===3){
-    //   this.tab = 3;
-    //   this.getAllTodos();
-    //   console.log("3")
-
-    // }
-  
     switch (index) {
+      // Tab 1 : get the on-going to-dos list
       case 1 :
           this.tab = 1;
           this.getTodos();
           console.log("1");
           break;
+        // Tab 2 : get the done to-dos list
         case 2:
           this.tab = 2;
           this.getDoneTasks();
           console.log("2");
           break;
+        // Tab 3 : get all to-dos
         case 3:
           this.tab = 3;
           this.getAllTodos();
@@ -70,7 +52,6 @@ export class TodosComponent implements OnInit {
           break;
         default:
           console.log("Oops");
-
     }
   }
 
