@@ -28,6 +28,21 @@ export class TodosComponent implements OnInit {
       this.tab = 1;
       this.getTodos();
     }
+
+    if (this.tab == 1) {
+      this.tab = 1;
+      this.getTodos();
+    }
+
+    if (this.tab == 2) {
+      this.tab = 2;
+      this.getDoneTasks();
+    }
+
+    if (this.tab == 3) {
+      this.tab = 3;
+      this.getAllTodos();
+    }
    }
 
   changeTab(index: number) {
@@ -36,75 +51,112 @@ export class TodosComponent implements OnInit {
       case 1 :
           this.tab = 1;
           this.getTodos();
-          console.log("1");
+          console.log("originally", this.tab)
+
           break;
         // Tab 2 : get the done to-dos list
         case 2:
           this.tab = 2;
           this.getDoneTasks();
-          console.log("2");
+          console.log("originally", this.tab)
+
           break;
         // Tab 3 : get all to-dos
         case 3:
           this.tab = 3;
           this.getAllTodos();
-          console.log("3");
+          console.log("originally", this.tab)
+
           break;
         default:
           console.log("Oops");
     }
+
+    console.log("originally", this.tab)
+
   }
 
-  async getTodos() {
+  getTodos() {
     this.todosService.getTodoTasks().subscribe((results) => {
       this.todosArray = results;
     });
   }
 
-  async getDoneTasks() {
+  getDoneTasks() {
     this.todosService.getDoneTasks().subscribe((results) => {
       this.todosArray = results;
     });
   }
 
 
-  async getAllTodos() {
+   getAllTodos() {
     this.todosService.getAllTodos().subscribe(results => {
       this.todosArray = results;
     });
   }
 
-  async onCheckboxChange(id: string) {
+  onCheckboxChange(id: string) {
     this.todosService.getTodoById(id).subscribe((result)=>{
       let doneCheck = result.done;
       doneCheck = !doneCheck;
       let body: TodoPayloadUpdateStatus = {
         "done": doneCheck.toString(),
       }
-      this.todosService.updateTodoStatus(id, body).subscribe();
+      this.todosService.updateTodoStatus(id, body).subscribe(()=>{
+        this.refreshAfterChanges();
+        console.log("Update tick ", this.tab)
+      }
+
+      );
+
+
     });
   }
 
-  async onSubmit(id: string, content: string) {
+  refreshAfterChanges() {
+    console.log("before refresh", this.tab)
+
+    switch (this.tab) {
+      // Tab 1 : get the on-going to-dos list
+      case 1 :
+          this.getTodos();
+          break;
+        // Tab 2 : get the done to-dos list
+        case 2:
+          this.getDoneTasks();
+          break;
+        // Tab 3 : get all to-dos
+        case 3:
+          this.getAllTodos();
+          break;
+        default:
+          console.log("Oops");
+    }
+
+    console.log("after refresh", this.tab)
+
+
+  }
+
+  onSubmit(id: string, content: string) {
     let body: TodoPayloadUpdateContent = {
       "content": content,
     }
-    this.todosService.updateTodoContent(id, body).subscribe(() => {
-      if(this.tab === 3){
-        this.getAllTodos();
-      }
-    });
+    this.todosService.updateTodoContent(id, body).subscribe();
+    this.refreshAfterChanges();
+    console.log("update text", this.tab)
+
   }
 
-  async contentLostFocus() {
+  contentLostFocus() {
     // BUG : when immediately clicked on another input, alert box loops over and over again
     // console.log("Don't forget to press on ENTER to save changes!")
   }
   
-  async deleteTodos(id: string) {
-    this.todosService.deleteTodos(id).subscribe();
-    if(this.tab === 3){
-      this.getAllTodos();
-    }
+  deleteTodos(id: string) {
+    this.todosService.deleteTodos(id).subscribe(() => {
+      this.refreshAfterChanges();
+      console.log("on delete", this.tab)
+    });
   }
 }

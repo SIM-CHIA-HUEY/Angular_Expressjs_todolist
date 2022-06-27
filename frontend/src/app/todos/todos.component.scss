@@ -116,15 +116,6 @@ ul {
     transform: translate(-50%, -50%);
     box-shadow: 0px 0px 4px 1px $color-snow
   }
-  // hover checked box : purple color check
-  input[type='checkbox']:hover:checked:after {
-    border-color: $base-blue;
-  }
-  // hover checked box : white color bg
-  input[type='checkbox']:hover:checked:before {
-    background-color: $color-snow;
-  }
-  
   // When checkbox is unchecked :
   input[type='checkbox']:before {
     content: '';
@@ -140,9 +131,6 @@ ul {
     border-color: $base-blue;
     border-width: 2px;
     border-radius: 5px;
-  }
-  input[type='checkbox']:hover:before {
-    background-color: $base-blue;
   }
   
   .row:hover input[type='checkbox']:before {

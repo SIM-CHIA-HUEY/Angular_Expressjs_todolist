@@ -13,6 +13,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from '@angular/common/http';
 import { StoreModule } from '@ngrx/store';
 import { TodosComponent } from './todos/todos.component';
+import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
+import { counterReducer } from '../app/store/reducer/counter.reducer';
 
 @NgModule({
   declarations: [
@@ -20,6 +22,7 @@ import { TodosComponent } from './todos/todos.component';
     HeaderComponent,
     NewtaskComponent,
     TodosComponent,
+    PageNotFoundComponent,
   ],
   imports: [
       BrowserModule,
@@ -32,6 +35,9 @@ import { TodosComponent } from './todos/todos.component';
       BrowserAnimationsModule,
       StoreModule.forRoot({
       }),
+      StoreModule.forRoot({
+        counterReducer
+    }), // + effect !
   ],
   providers: [],
   // declarations: [AppComponent],
