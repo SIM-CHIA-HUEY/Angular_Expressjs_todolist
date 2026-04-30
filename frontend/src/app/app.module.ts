@@ -10,7 +10,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { MatTabsModule } from '@angular/material/tabs';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
-import { HttpClientModule } from '@angular/common/http';
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 import { StoreModule } from '@ngrx/store';
 import { TodosComponent } from './todos/todos.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
@@ -18,34 +18,26 @@ import { counterReducer } from '../app/store/reducer/counter.reducer';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 
-@NgModule({
-  declarations: [
-    AppComponent,
-    HeaderComponent,
-    NewtaskComponent,
-    TodosComponent,
-    PageNotFoundComponent,
-  ],
-  imports: [
-      BrowserModule,
-      AppRoutingModule,
-      FormsModule,
-      ReactiveFormsModule,
-      FontAwesomeModule,
-      HttpClientModule,
-      MatTabsModule,
-      BrowserAnimationsModule,
-      StoreModule.forRoot({
-      }),
-      StoreModule.forRoot({
-        counterReducer
-    }),
-      StoreModule.forRoot({}, {}),
-      EffectsModule.forRoot([]),
-      StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: !isDevMode() }), // + effect !
-  ],
-  providers: [],
-  // declarations: [AppComponent],
-  bootstrap: [AppComponent]
-})
+@NgModule({ declarations: [
+        AppComponent,
+        HeaderComponent,
+        NewtaskComponent,
+        TodosComponent,
+        PageNotFoundComponent,
+    ],
+    // declarations: [AppComponent],
+    bootstrap: [AppComponent], imports: [BrowserModule,
+        AppRoutingModule,
+        FormsModule,
+        ReactiveFormsModule,
+        FontAwesomeModule,
+        MatTabsModule,
+        BrowserAnimationsModule,
+        StoreModule.forRoot({}),
+        StoreModule.forRoot({
+            counterReducer
+        }),
+        StoreModule.forRoot({}, {}),
+        EffectsModule.forRoot([]),
+        StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: !isDevMode() })], providers: [provideHttpClient(withInterceptorsFromDi())] })
 export class AppModule { }
