@@ -24,13 +24,13 @@
     "@fortawesome/free-solid-svg-icons": "^6.0.0",
     "@ngrx/effects": "^18.1.1",
     "@ngrx/entity": "^18.1.1",
+    "@ngrx/operators": "^18.0.0",
     "@ngrx/store": "^18.1.1",
     "@ngrx/store-devtools": "^18.1.1",
     "axios": "^0.26.0",
     "rxjs": "~7.5.0",
     "tslib": "^2.3.0",
-    "zone.js": "~0.14.10",
-    "@ngrx/operators": "^18.0.0"
+    "zone.js": "~0.14.10"
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "^18.2.21",
@@ -43,8 +43,10 @@
     "@angular/compiler-cli": "^18.2.14",
     "@types/jasmine": "~3.10.0",
     "@types/node": "^12.11.1",
-    "@typescript-eslint/eslint-plugin": "7.11.0",
-    "@typescript-eslint/parser": "7.11.0",
+    "@typescript-eslint/eslint-plugin": "^8.59.1",
+    "@typescript-eslint/parser": "^8.59.1",
+    "@typescript-eslint/types": "^8.59.1",
+    "@typescript-eslint/utils": "^8.59.1",
     "eslint": "^8.57.0",
     "jasmine-core": "~4.0.0",
     "karma": "~6.3.0",
