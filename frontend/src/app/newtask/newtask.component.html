@@ -8,19 +8,25 @@
       <div class="form-group" >
         <div>
           <input type="text" class="content-textarea" id="todoContent" name="todoContent" value={todoContent}
-                 placeholder="Be concise, max 50 characters"
-                 required minlength="1" maxlength="50"
-                 [(ngModel)]="form.todoContent" #todoContent="ngModel">
+            placeholder="Be concise, max 50 characters"
+            required minlength="1" maxlength="50"
+            [(ngModel)]="form.todoContent" #todoContent="ngModel">
           <!-- Validations error messages -->
-          <div *ngIf="todoContent.invalid && (todoContent.dirty || todoContent.touched)"
-               class="danger-alert">
-            <div *ngIf="todoContent.errors?.['required']">
-              * To-do content is required if you want to add something.
+          @if (todoContent.invalid && (todoContent.dirty || todoContent.touched)) {
+            <div
+              class="danger-alert">
+              @if (todoContent.errors?.['required']) {
+                <div>
+                  * To-do content is required if you want to add something.
+                </div>
+              }
+              @if (todoContent.errors?.['maxlength']) {
+                <div>
+                  * To-do content must be at most 50 characters to be efficient.
+                </div>
+              }
             </div>
-            <div *ngIf="todoContent.errors?.['maxlength']">
-              * To-do content must be at most 50 characters to be efficient.
-            </div>
-          </div>
+          }
 
         </div>
       </div>
