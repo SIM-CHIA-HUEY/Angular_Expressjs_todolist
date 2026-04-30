@@ -16,9 +16,10 @@ import { Store } from '@ngrx/store';
 import { sumAllTodos } from '../store/actions/counter.actions'
 
 @Component({
-  selector: 'app-newtask',
-  templateUrl: './newtask.component.html',
-  styleUrls: ['./newtask.component.scss']
+    selector: 'app-newtask',
+    templateUrl: './newtask.component.html',
+    styleUrls: ['./newtask.component.scss'],
+    standalone: false
 })
 export class NewtaskComponent implements OnInit {
 
