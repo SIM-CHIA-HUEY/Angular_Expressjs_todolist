@@ -1,0 +1,52 @@
+const mongoose = require("mongoose");
+
+
+const todoSchema = new mongoose.Schema(
+
+{
+
+    title:{
+        type:String,
+        required:true,
+        trim:true,
+        maxlength:100
+    },
+
+
+    content:{
+        type:String,
+        default:"",
+        maxlength:500
+    },
+
+
+    isDone:{
+        type:Boolean,
+        default:false
+    }
+
+},
+
+{
+    timestamps:true
+}
+
+);
+
+
+
+module.exports =
+mongoose.model(
+    "Todo",
+    todoSchema
+);
+
+
+// const mongoose = require("mongoose")
+
+// const schema = mongoose.Schema({
+//     content: String,
+//     isDone: Boolean
+// })
+
+// module.exports = mongoose.model("Todo", schema)

@@ -10,7 +10,7 @@ export class TodosService {
 
   constructor(private http: HttpClient) { }
 
-  private baseURL = `http://localhost:5000/api`
+  private baseURL = `http://localhost:3000`
 
   // Todos
   getAllTodos(): Observable<any> {
@@ -22,11 +22,11 @@ export class TodosService {
   }
 
   getTodoTasks(): Observable<any> {
-    return this.http.get(`${this.baseURL}/ongoing`) as Observable<any>;
+    return this.http.get(`${this.baseURL}/todos/ongoing`) as Observable<any>;
   }
 
   getDoneTasks(): Observable<any> {
-    return this.http.get(`${this.baseURL}/done`) as Observable<any>;
+    return this.http.get(`${this.baseURL}/todos/done`) as Observable<any>;
   }
 
   addTodo(data:TodoPayloadAddNew): Observable<any> {

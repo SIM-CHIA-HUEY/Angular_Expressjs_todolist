@@ -16,7 +16,7 @@ import { Store } from '@ngrx/store';
 import { sumAllTodos } from '../store/actions/counter.actions'
 
 @Component({
-    selector: 'app-newtask',
+    selector: '.app-newtask',
     templateUrl: './newtask.component.html',
     styleUrls: ['./newtask.component.scss'],
     standalone: false
@@ -51,7 +51,7 @@ export class NewtaskComponent implements OnInit {
     if(this.isValidForm) {
       let body:TodoPayloadAddNew = {
         "content": this.form.todoContent,
-        "done": false
+        "isDone": false
       }
       this.todosService.addTodo(body).subscribe(response =>
         console.log(response)
@@ -65,7 +65,7 @@ export class NewtaskComponent implements OnInit {
   //   if(this.isValidForm) {
   //     await axios.post('http://localhost:5000/api/todos', {
   //       "content": this.form.todoContent,
-  //       "done": "false"
+  //       "isDone": "false"
   //     })
   //   }
   //   window.location.reload();

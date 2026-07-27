@@ -7,7 +7,7 @@ import { HeaderComponent } from './header/header.component';
 import { NewtaskComponent } from './newtask/newtask.component';
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { MatTabsModule } from '@angular/material/tabs';
+// import { MatTabsModule } from '@angular/material/tabs';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
@@ -18,20 +18,21 @@ import { counterReducer } from '../app/store/reducer/counter.reducer';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 
-@NgModule({ declarations: [
+@NgModule({ 
+    declarations: [
         AppComponent,
         HeaderComponent,
         NewtaskComponent,
         TodosComponent,
         PageNotFoundComponent,
-    ],
-    // declarations: [AppComponent],
-    bootstrap: [AppComponent], imports: [BrowserModule,
+    ], 
+    imports: [
+        BrowserModule,
         AppRoutingModule,
         FormsModule,
         ReactiveFormsModule,
         FontAwesomeModule,
-        MatTabsModule,
+        // MatTabsModule,
         BrowserAnimationsModule,
         StoreModule.forRoot({}),
         StoreModule.forRoot({
@@ -39,5 +40,9 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
         }),
         StoreModule.forRoot({}, {}),
         EffectsModule.forRoot([]),
-        StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: !isDevMode() })], providers: [provideHttpClient(withInterceptorsFromDi())] })
+        StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: !isDevMode() })
+    ], 
+    providers: [provideHttpClient(withInterceptorsFromDi())],
+    bootstrap: [AppComponent]
+})
 export class AppModule { }

@@ -7,7 +7,7 @@ import { ActivatedRoute } from '@angular/router';
 import { TodoPayload, TodoPayloadUpdateContent, TodoPayloadUpdateStatus } from 'src/app/models/todo.model';
 
 @Component({
-    selector: 'app-todos',
+    selector: '.app-todos',
     templateUrl: './todos.component.html',
     styleUrls: ['./todos.component.scss'],
     standalone: false
@@ -16,7 +16,6 @@ import { TodoPayload, TodoPayloadUpdateContent, TodoPayloadUpdateStatus } from '
 export class TodosComponent implements OnInit {
 
   tab = 0;
-  faTrash = faTrash;
   todosArray: TodoPayload[] = [];
 
   constructor(
@@ -52,21 +51,21 @@ export class TodosComponent implements OnInit {
       case 1 :
           this.tab = 1;
           this.getTodos();
-          console.log("originally", this.tab)
+          // console.log("originally", this.tab)
 
           break;
         // Tab 2 : get the done to-dos list
         case 2:
           this.tab = 2;
           this.getDoneTasks();
-          console.log("originally", this.tab)
+          // console.log("originally", this.tab)
 
           break;
         // Tab 3 : get all to-dos
         case 3:
           this.tab = 3;
           this.getAllTodos();
-          console.log("originally", this.tab)
+          // console.log("originally", this.tab)
 
           break;
         default:
@@ -98,10 +97,10 @@ export class TodosComponent implements OnInit {
 
   onCheckboxChange(id: string) {
     this.todosService.getTodoById(id).subscribe((result)=>{
-      let doneCheck = result.done;
-      doneCheck = !doneCheck;
+      let isDoneCheck = result.isDone;
+      isDoneCheck = !isDoneCheck;
       let body: TodoPayloadUpdateStatus = {
-        "done": doneCheck.toString(),
+        "isDone": isDoneCheck.toString(),
       }
       this.todosService.updateTodoStatus(id, body).subscribe(()=>{
         this.refreshAfterChanges();

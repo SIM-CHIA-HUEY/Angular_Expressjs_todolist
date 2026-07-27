@@ -1,16 +1,24 @@
+// export interface TodoPayload {
+//     "_id": string,
+//     "content": string,
+//     "done": boolean
+// }
+
 export interface TodoPayload {
     "_id": string,
+    "title": string,
+    "completed": boolean,
     "content": string,
-    "done": boolean
+    "isDone": boolean
 }
 
 export interface TodoPayloadAddNew {
     "content": string,
-    "done": boolean
+    "isDone": boolean
 }
 
 export interface TodoPayloadUpdateStatus {
-    "done": boolean
+    "isDone": boolean
 }
 
 export interface TodoPayloadUpdateContent {

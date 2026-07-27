@@ -15,22 +15,23 @@
     </div>
 
     <div class="contents">
-      <div>
+      <div>        
         <ul>
           @for (todo of todosArray; track todo; let i = $index) {
             <li>
               <div class="row">
                 <div class="column-1">
-                  <input type="checkbox" [(ngModel)]="todo.done" (change)="onCheckboxChange(todo._id)" class="checkbox"/>
+                  <input type="checkbox" [(ngModel)]="todo.isDone" (change)="onCheckboxChange(todo._id)" class="checkbox"/>
                 </div>
                 <div class="column-7">
+                  <div>{{todo.title}}</div>
                   <textarea rows="2" maxlength=50
                     id="content" class="update-content" [(ngModel)]="todo.content"
                   (keyup.enter)="onSubmit(todo._id, todo.content)" (blur)="contentLostFocus()"></textarea>
                 </div>
                 <div class="column-1">
                   <button (click)="deleteTodos(todo._id)" class="trash-button">
-                    <fa-icon [icon]="faTrash"></fa-icon>
+                    <i class="fa-solid fa-trash"></i>
                   </button>
                 </div>
               </div>
