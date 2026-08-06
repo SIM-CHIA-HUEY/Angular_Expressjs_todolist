@@ -1,9 +1,4 @@
-/* You can add global styles to this file, and also import other style files */
-
-
-/*@import 'bootstrap/dist/css/bootstrap.min.css';*/
-
-@import './app/scss/base.scss';
+@use './app/scss/base.scss' as *;
 
 html, body { height: 100%; width: 100%;}
 

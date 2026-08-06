@@ -25,8 +25,8 @@ export class TodosComponent implements OnInit {
 
   ngOnInit(): void {
     if (this.tab == 0) {
-      this.tab = 1;
-      this.getTodos();
+      this.tab = 3;
+      this.getAllTodos();
     }
 
     if (this.tab == 1) {
@@ -71,9 +71,6 @@ export class TodosComponent implements OnInit {
         default:
           console.log("Oops");
     }
-
-    console.log("originally", this.tab)
-
   }
 
   getTodos() {
@@ -95,27 +92,19 @@ export class TodosComponent implements OnInit {
     });
   }
 
-  onCheckboxChange(id: string) {
-    this.todosService.getTodoById(id).subscribe((result)=>{
-      let isDoneCheck = result.isDone;
-      isDoneCheck = !isDoneCheck;
-      let body: TodoPayloadUpdateStatus = {
-        "isDone": isDoneCheck.toString(),
-      }
-      this.todosService.updateTodoStatus(id, body).subscribe(()=>{
+  onCheckboxChange(id: string, isDone: boolean) {
+    const body = {
+      isDone: isDone
+    };
+
+    this.todosService.updateTodoStatus(id, body).subscribe({
+      next: () => {
         this.refreshAfterChanges();
-        console.log("Update tick ", this.tab)
       }
-
-      );
-
-
-    });
+   });
   }
 
   refreshAfterChanges() {
-    console.log("before refresh", this.tab)
-
     switch (this.tab) {
       // Tab 1 : get the on-going to-dos list
       case 1 :
@@ -132,10 +121,6 @@ export class TodosComponent implements OnInit {
         default:
           console.log("Oops");
     }
-
-    console.log("after refresh", this.tab)
-
-
   }
 
   onSubmit(id: string, content: string) {

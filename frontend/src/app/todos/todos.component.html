@@ -17,11 +17,11 @@
     <div class="contents">
       <div>        
         <ul>
-          @for (todo of todosArray; track todo; let i = $index) {
+          @for (todo of todosArray; track todo._id; let i = $index) {
             <li>
               <div class="row">
                 <div class="column-1">
-                  <input type="checkbox" [(ngModel)]="todo.isDone" (change)="onCheckboxChange(todo._id)" class="checkbox"/>
+                  <input type="checkbox"   [checked]="todo.isDone" (change)="onCheckboxChange(todo._id.toString(), $event.target.checked)" class="checkbox"/>
                 </div>
                 <div class="column-7">
                   <div>{{todo.title}}</div>
