@@ -7,9 +7,13 @@
 
       <div class="form-group" >
         <div>
-          <input type="text" class="content-textarea" id="todoContent" name="todoContent" value={todoContent}
-            placeholder="Be concise, max 50 characters"
+          <input type="text" class="content-textarea" id="todoTitle" name="todoTitle" value={todoTitle}
+            placeholder="Title : Be concise, max 50 characters"
             required minlength="1" maxlength="50"
+            [(ngModel)]="form.todoTitle" #todoTitle="ngModel">
+            <input type="text" class="content-textarea" id="todoContent" name="todoContent" value={todoContent}
+            placeholder="Content : Be concise, max 100 characters"
+            required minlength="1" maxlength="100"
             [(ngModel)]="form.todoContent" #todoContent="ngModel">
           <!-- Validations error messages -->
           @if (todoContent.invalid && (todoContent.dirty || todoContent.touched)) {

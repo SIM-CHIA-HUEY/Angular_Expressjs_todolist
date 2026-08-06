@@ -96,7 +96,6 @@ export class TodosComponent implements OnInit {
     const body = {
       isDone: isDone
     };
-
     this.todosService.updateTodoStatus(id, body).subscribe({
       next: () => {
         this.refreshAfterChanges();

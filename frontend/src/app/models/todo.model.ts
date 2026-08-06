@@ -7,7 +7,6 @@
 export interface TodoPayload {
     "_id": string,
     "title": string,
-    "completed": boolean,
     "content": string,
     "isDone": boolean
 }
