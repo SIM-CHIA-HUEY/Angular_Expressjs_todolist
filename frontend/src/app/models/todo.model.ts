@@ -12,6 +12,7 @@ export interface TodoPayload {
 }
 
 export interface TodoPayloadAddNew {
+    "title": string,
     "content": string,
     "isDone": boolean
 }

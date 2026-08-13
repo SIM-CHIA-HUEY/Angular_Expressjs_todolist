@@ -11,7 +11,23 @@
             placeholder="Title : Be concise, max 50 characters"
             required minlength="1" maxlength="50"
             [(ngModel)]="form.todoTitle" #todoTitle="ngModel">
-            <input type="text" class="content-textarea" id="todoContent" name="todoContent" value={todoContent}
+            <!-- Validations error messages -->
+            @if (todoTitle.invalid && (todoTitle.dirty || todoTitle.touched)) {
+            <div
+              class="danger-alert">
+              @if (todoTitle.errors?.['required']) {
+                <div>
+                  * To-do title is required if you want to add something.
+                </div>
+              }
+              @if (todoTitle.errors?.['maxlength']) {
+                <div>
+                  * To-do title must be at most 50 characters to be efficient.
+                </div>
+              }
+            </div>
+          }
+          <input type="text" class="content-textarea" id="todoContent" name="todoContent" value={todoContent}
             placeholder="Content : Be concise, max 100 characters"
             required minlength="1" maxlength="100"
             [(ngModel)]="form.todoContent" #todoContent="ngModel">
@@ -26,7 +42,7 @@
               }
               @if (todoContent.errors?.['maxlength']) {
                 <div>
-                  * To-do content must be at most 50 characters to be efficient.
+                  * To-do content must be at most 100 characters to be efficient.
                 </div>
               }
             </div>
@@ -36,7 +52,7 @@
       </div>
 
       <div class="form-buttons">
-        <button type="submit" class="button-plus" [disabled]="!myForm.valid">
+        <button type="button" (click)="submit()" class="button-plus" [disabled]="!myForm.valid">
           <i class="fa-solid fa-plus"></i> Add
         </button>
       </div>

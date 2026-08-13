@@ -4,7 +4,6 @@ import { faPlus } from '@fortawesome/free-solid-svg-icons';
 // ----- API POST 2 : Add a to-do task with service, and in component : -----
 import { TodosService } from '../services/todos.service';
 import { TodoPayloadAddNew } from 'src/app/models/todo.model';
-import { TodoPayload } from 'src/app/models/todo.model';
 import { ActivatedRoute } from '@angular/router';
 
 // -----  API POST 1 : Add a to-do task very simply without service, only in component with AXIOS : -----
@@ -28,6 +27,7 @@ export class NewtaskComponent implements OnInit {
   // We initialize an empty variable here that'll stock the value from the Store : 
   count$: Observable<number>;
   form: any = {
+    todoTitle: '',
     todoContent: ''
   };
   isValidForm = true;
@@ -49,14 +49,9 @@ export class NewtaskComponent implements OnInit {
 
   // ----- API POST 2 : Add a to-do task with service, and in component : -----
   async submit () {
+    console.log("submit() called");
     if(this.isValidForm) {
-      // let body:TodoPayload = {
-      //   "_id": "",
-      //   "title": this.form.todoTitle,
-      //   "content": this.form.todoContent,
-      //   "isDone": false
-      // }
-      let body = {
+      let body:TodoPayloadAddNew = {
         "title": this.form.todoTitle,
         "content": this.form.todoContent,
         "isDone": false
@@ -64,7 +59,7 @@ export class NewtaskComponent implements OnInit {
       this.todosService.addTodo(body).subscribe(response =>
         console.log(response)
       )
-      window.location.reload();
+      // window.location.reload();
     }
   }
 
