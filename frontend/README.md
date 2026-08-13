@@ -1,4 +1,4 @@
-# Frontend
+## Frontend
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 21.2.9.
 
@@ -7,6 +7,9 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 Back end application : Run `npm start` for a dev server.
 
 Front end application : Run `ng serve`, navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+
+## Database
+Create an account at Mongodb, create a collection which name will be your DB_NAME, and use your SRV connection strings that you can find on your MongoDB account interface in `Cluster` -> `Connect` -> `Drivers` (it starts with `mongodb+srv://`), which will be your MONGO_URI in your .env file.
 
 ## Code scaffolding
 
