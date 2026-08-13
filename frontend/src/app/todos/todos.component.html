@@ -3,15 +3,15 @@
 
   <div class="tabs">
     <div class="index">
-      <div autofocus tabindex="0" role="tab"
+      <div tabindex="0" role="tab"
+        (click)="changeTab(3)" (keyup.enter)="tab=3"
+      [ngClass]="{active: tab===3}" class="tab-button">ALL</div>
+      <div tabindex="0" role="tab"
         (click)="changeTab(1)" (keyup.enter)="tab=1"
       [ngClass]="{active: tab===1}" class="tab-button">TO-DO</div>
       <div tabindex="0" role="tab"
         (click)="changeTab(2)" (keyup.enter)="tab=2"
       [ngClass]="{active: tab===2}" class="tab-button">DONE</div>
-      <div tabindex="0" role="tab"
-        (click)="changeTab(3)" (keyup.enter)="tab=3"
-      [ngClass]="{active: tab===3}" class="tab-button">ALL</div>
     </div>
 
     <div class="contents">

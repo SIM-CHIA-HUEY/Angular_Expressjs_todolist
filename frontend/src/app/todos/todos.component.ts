@@ -117,8 +117,6 @@ export class TodosComponent implements OnInit {
         case 3:
           this.getAllTodos();
           break;
-        default:
-          console.log("Oops");
     }
   }
 

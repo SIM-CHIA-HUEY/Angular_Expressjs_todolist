@@ -10,8 +10,25 @@ h3 {
   font-size: xx-large;
 }
 
+.title-textarea {
+  width: 95%;
+  height: 50px;
+  padding: 0 15px;
+  margin-bottom: 10px;
+  color: $base-violet;
+  font-size: medium;
+}
+.content-textarea:focus {
+  outline: none;
+}
+@media screen and (max-width: 415px) {
+  .content-textarea {
+    width: 90%;
+  }
+}
+
 .content-textarea {
-  width: 90%;
+  width: 95%;
   height: 50px;
   padding: 0 15px;
   color: $base-violet;
