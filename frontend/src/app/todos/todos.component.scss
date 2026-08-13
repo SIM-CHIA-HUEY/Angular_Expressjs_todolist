@@ -141,17 +141,23 @@ ul {
     border-width: 3px;
   }
   
-  .column-1 {
+  .column-icon {
     float: left;
     width: 10%;
     padding: 0;
     margin: 0;
     justify-content: start;
   }
-  .column-7 {
+  .column-title {
     float: left;
     width: 70%;
     padding: 0 10px 0 10px;
+    margin: 0;
+  }
+  .column-content {
+    float: left;
+    width: 100%;
+    padding: 0 10px 0 65px;
     margin: 0;
   }
   .row {
@@ -171,9 +177,27 @@ ul {
   textarea {
     resize: none;
   }
+  .update-title {
+    font-size: medium;
+    font-family: 'Roboto', sans-serif;
+    font-weight: bolder;
+    color: $base-ocean;
+    width: 100%;
+    border: none;
+  }
+  .update-title:hover {
+    border-bottom: solid $base-blue 1px;
+  }
+  .update-title:focus {
+    outline: none;
+    border-bottom: solid $base-blue 1px;
+    color: $base-blue;
+  }
+  
   .update-content {
     font-size: medium;
-    font-family: 'Roboto', sans-serif;;
+    font-family: 'Roboto', sans-serif;
+    width: 80%;
     border: none;
   }
   .update-content:hover {

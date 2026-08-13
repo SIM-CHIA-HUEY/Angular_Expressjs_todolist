@@ -47,7 +47,7 @@ export class NewtaskComponent implements OnInit {
     this.store.dispatch(sumAllTodos());
   }
 
-  // ----- API POST 2 : Add a to-do task with service, and in component : -----
+  // Add a to-do task with service :
   async submit () {
     console.log("submit() called");
     if(this.isValidForm) {
@@ -59,19 +59,7 @@ export class NewtaskComponent implements OnInit {
       this.todosService.addTodo(body).subscribe(response =>
         console.log(response)
       )
-      // window.location.reload();
     }
   }
-
-  // -----  API POST 1 : Add a to-do task very simply without service, only in component with AXIOS : -----
-  // async submit () {
-  //   if(this.isValidForm) {
-  //     await axios.post('http://localhost:5000/api/todos', {
-  //       "content": this.form.todoContent,
-  //       "isDone": "false"
-  //     })
-  //   }
-  //   window.location.reload();
-  // }
 
 }

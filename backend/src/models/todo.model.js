@@ -40,13 +40,3 @@ mongoose.model(
     "Todo",
     todoSchema
 );
-
-
-// const mongoose = require("mongoose")
-
-// const schema = mongoose.Schema({
-//     content: String,
-//     isDone: Boolean
-// })
-
-// module.exports = mongoose.model("Todo", schema)

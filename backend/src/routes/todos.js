@@ -57,6 +57,7 @@ router.get("/ongoing", async (req, res) => {
     }
 });
 
+// Update status of a todo (isDone)
 router.patch("/:id", async (req, res) => {
     try {
         const db = getDB();
@@ -92,7 +93,77 @@ router.patch("/:id", async (req, res) => {
     }
 });
 
-// router.delete("/:id", todoController.deleteTodo);
+// Update title of a todo
+router.patch("/:id/title", async (req, res) => {
+    try {
+        const db = getDB();
+
+        const id = Number(req.params.id);
+        const { title } = req.body;
+
+        const result = await db
+            .collection("todolist")
+            .updateOne(
+                { _id: id },
+                {
+                    $set: {
+                        title: title
+                    }
+                }
+            );
+
+        if (result.matchedCount === 0) {
+            return res.status(404).json({
+                message: "Tâche introuvable"
+            });
+        }
+
+        res.status(200).json({
+            message: "Tâche mise à jour"
+        });
+
+    } catch(error) {
+        res.status(500).json({
+            message: error.message
+        });
+    }
+});
+
+// Update content of a todo
+router.patch("/:id/content", async (req, res) => {
+    try {
+        const db = getDB();
+
+        const id = Number(req.params.id);
+        const { content } = req.body;
+
+        const result = await db
+            .collection("todolist")
+            .updateOne(
+                { _id: id },
+                {
+                    $set: {
+                        content: content
+                    }
+                }
+            );
+
+        if (result.matchedCount === 0) {
+            return res.status(404).json({
+                message: "Tâche introuvable"
+            });
+        }
+
+        res.status(200).json({
+            message: "Tâche mise à jour"
+        });
+
+    } catch(error) {
+        res.status(500).json({
+            message: error.message
+        });
+    }
+});
 
 // DELETE /todos/:id
 router.delete("/:id", async (req, res) => {

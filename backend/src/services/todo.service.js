@@ -1,23 +1,17 @@
 const Todo =
 require("../models/todo.model");
 
-
-
 exports.getAllTodos = async()=>{
 
     return await Todo.find();
 
 };
 
-
-
 exports.getTodoById = async(id)=>{
 
     return await Todo.findById(id);
 
 };
-
-
 
 exports.createTodo = async(data)=>{
 
@@ -28,8 +22,6 @@ exports.createTodo = async(data)=>{
     return await todo.save();
 
 };
-
-
 
 exports.updateTodo = async(id,data)=>{
 
@@ -47,14 +39,6 @@ exports.updateTodo = async(id,data)=>{
     );
 
 };
-
-
-
-// exports.deleteTodo = async(id)=>{
-
-//     return await Todo.findByIdAndDelete(id);
-
-// };
 
 export const deleteTodo = async (id) => {
     const db = getDB();

@@ -65,25 +65,6 @@ exports.updateTodo = async(req,res,next)=>{
     }
 };
 
-// exports.deleteTodo = async(req,res,next)=>{
-//     try{
-//         const todo =
-//         await todoService.deleteTodo(
-//             req.params.id
-//         );
-//         if(!todo){
-//             return res.status(404)
-//             .json({
-//                 message:"Todo not found"
-//             });
-//         }
-//         res.status(204)
-//         .send();
-//     }catch(error){
-//         next(error);
-//     }
-// };
-
 export const deleteTodo = async(req,res,next)=>{
     try {
         const todo = await todoService.deleteTodo(

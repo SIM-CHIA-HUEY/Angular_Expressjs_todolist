@@ -4,7 +4,7 @@ import { faTrash } from '@fortawesome/free-solid-svg-icons';
 
 import { TodosService } from '../services/todos.service';
 import { ActivatedRoute } from '@angular/router';
-import { TodoPayload, TodoPayloadUpdateContent, TodoPayloadUpdateStatus } from 'src/app/models/todo.model';
+import { TodoPayload, TodoPayloadUpdateContent, TodoPayloadUpdateStatus, TodoPayloadUpdateTitle } from 'src/app/models/todo.model';
 
 @Component({
     selector: '.app-todos',
@@ -120,14 +120,18 @@ export class TodosComponent implements OnInit {
     }
   }
 
-  onSubmit(id: string, content: string) {
+  onSubmitTitle(id: string, title: string) {
+    let body: TodoPayloadUpdateTitle = {
+      "title": title,
+    }
+    this.todosService.updateTodoTitle(id, body).subscribe();
+  }
+
+  onSubmitContent(id: string, content: string) {
     let body: TodoPayloadUpdateContent = {
       "content": content,
     }
     this.todosService.updateTodoContent(id, body).subscribe();
-    this.refreshAfterChanges();
-    console.log("update text", this.tab)
-
   }
 
   contentLostFocus() {
