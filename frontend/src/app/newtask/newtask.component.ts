@@ -12,7 +12,9 @@ import { ActivatedRoute } from '@angular/router';
     standalone: false
 })
 export class NewtaskComponent implements OnInit {
-  todosCount: number = 0;
+  todosArray: any[] = [];
+  todosCount$ = this.todosService.todosCount$;
+
   form: any = {
     todoTitle: '',
     todoContent: ''
@@ -46,6 +48,7 @@ export class NewtaskComponent implements OnInit {
       }
       this.todosService.addTodo(body).subscribe({
         next: (response) => {
+          this.todosService.incrementTodosCount();
           this.todosService.notifyTodoCreated(response.todo);
           // vider le formulaire
           this.form.todoTitle = '';
@@ -58,12 +61,12 @@ export class NewtaskComponent implements OnInit {
       });
     }
 
-    this.todosCount = this.todosCount + 1;
   }
 
   getTodosCount() {
-    this.todosService.getAllTodos().subscribe((results) => {
-      this.todosCount = results.length;
+    this.todosService.getAllTodos().subscribe(results => {
+    this.todosArray = results;
+    this.todosService.getTodosCountService(results.length);
     });
   }
 

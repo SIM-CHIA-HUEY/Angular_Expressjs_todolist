@@ -167,12 +167,12 @@ export class TodosComponent implements OnInit {
   autoResize(textarea: HTMLTextAreaElement): void {
     textarea.style.height = '0px';
     textarea.style.height = `${textarea.scrollHeight}px`;
-    console.log("scrollHeight", textarea.scrollHeight)
 }
   
   deleteTodos(id: string) {
     this.todosService.deleteTodos(id).subscribe(() => {
       this.refreshAfterChanges();
+      this.todosService.decrementTodosCount();
     });
   }
 }

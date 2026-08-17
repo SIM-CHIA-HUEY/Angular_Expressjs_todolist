@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Subject, Observable } from 'rxjs';
+import { Subject, Observable, BehaviorSubject } from 'rxjs';
 import { TodoPayload, TodoPayloadAddNew, TodoPayloadUpdateContent, TodoPayloadUpdateStatus, TodoPayloadUpdateTitle } from '../models/todo.model';
 
 @Injectable({
@@ -15,6 +15,10 @@ export class TodosService {
   private todoCreatedSubject = new Subject<TodoPayload>();
 
   todoCreated$ = this.todoCreatedSubject.asObservable();
+
+  private todosCountSubject = new BehaviorSubject<number>(0);
+
+  todosCount$ = this.todosCountSubject.asObservable();
 
   // Todos
   getAllTodos(): Observable<any> {
@@ -55,6 +59,22 @@ export class TodosService {
 
   notifyTodoCreated(todo: TodoPayload) {
     this.todoCreatedSubject.next(todo);
+  }
+
+  getTodosCountService(count: number): void {
+  this.todosCountSubject.next(count);
+  }
+
+  incrementTodosCount(): void {
+    this.todosCountSubject.next(
+      this.todosCountSubject.value + 1
+    );
+  }
+
+  decrementTodosCount(): void {
+    this.todosCountSubject.next(
+      Math.max(0, this.todosCountSubject.value - 1)
+    );
   }
 
 }
