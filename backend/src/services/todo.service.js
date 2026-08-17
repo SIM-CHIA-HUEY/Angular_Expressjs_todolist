@@ -1,53 +1,113 @@
-const Todo =
-require("../models/todo.model");
+import { getDB } from "../config/database.js";
 
-exports.getAllTodos = async()=>{
+const collectionName = "todolist";
 
-    return await Todo.find();
+export const getAllTodos = async () => {
+    const db = getDB();
 
+    return await db
+        .collection(collectionName)
+        .find({})
+        .toArray();
 };
 
-exports.getTodoById = async(id)=>{
+export const getDoneTodos = async () => {
+    const db = getDB();
 
-    return await Todo.findById(id);
-
+    return await db
+        .collection(collectionName)
+        .find({ isDone: true })
+        .toArray();
 };
 
-exports.createTodo = async(data)=>{
+export const getOngoingTodos = async () => {
+    const db = getDB();
 
-    const todo =
-    new Todo(data);
-
-
-    return await todo.save();
-
+    return await db
+        .collection(collectionName)
+        .find({ isDone: false })
+        .toArray();
 };
 
-exports.updateTodo = async(id,data)=>{
+export const updateTodoStatus = async (id, isDone) => {
+    const db = getDB();
 
-    return await Todo.findByIdAndUpdate(
+    return await db
+        .collection(collectionName)
+        .updateOne(
+            { _id: id },
+            {
+                $set: {
+                    isDone: isDone
+                }
+            }
+        );
+};
 
-        id,
+export const updateTodoTitle = async (id, title) => {
+    const db = getDB();
 
-        data,
+    return await db
+        .collection(collectionName)
+        .updateOne(
+            { _id: id },
+            {
+                $set: {
+                    title: title
+                }
+            }
+        );
+};
 
-        {
-            new:true,
-            runValidators:true
-        }
+export const updateTodoContent = async (id, content) => {
+    const db = getDB();
 
-    );
-
+    return await db
+        .collection(collectionName)
+        .updateOne(
+            { _id: id },
+            {
+                $set: {
+                    content: content
+                }
+            }
+        );
 };
 
 export const deleteTodo = async (id) => {
     const db = getDB();
 
-    const result = await db
-        .collection("todolist")
+    return await db
+        .collection(collectionName)
         .deleteOne({
-            _id: Number(id)
+            _id: id
         });
+};
 
-    return result.deletedCount > 0;
+export const createTodo = async (title, content) => {
+    const db = getDB();
+
+    const lastTodo = await db
+        .collection(collectionName)
+        .find()
+        .sort({ _id: -1 })
+        .limit(1)
+        .toArray();
+
+    const newId = lastTodo.length > 0
+        ? lastTodo[0]._id + 1
+        : 1;
+
+    const newTodo = {
+        _id: newId,
+        title,
+        content,
+        isDone: false
+    };
+
+    await db
+        .collection(collectionName)
+        .insertOne(newTodo);
+
+    return newTodo;
 };

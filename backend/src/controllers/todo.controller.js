@@ -1,86 +1,157 @@
-const todoService =
-require("../services/todo.service");
+import * as todoService from "../services/todo.service.js";
 
-// import * as todoService from "../services/todo.service.js";
-
-
-exports.getTodos = async(req,res,next)=>{
-
-    try{
-        const todos = "all todos"
-        res.json(todos);
-    }catch(error){
-        next(error);
-    }
-};
-
-exports.getTodo = async(req,res,next)=>{
-    try{
-        const todo =
-        await todoService.getTodoById(
-            req.params.id
-        );
-        if(!todo){
-            return res.status(404)
-            .json({
-                message:"Todo not found"
-            });
-        }
-        res.json(todo);
-    }catch(error){
-        next(error);
-    }
-};
-
-exports.createTodo = async(req,res,next)=>{
-
-    try{
-        const todo =
-        await todoService.createTodo(
-            req.body
-        );
-        res.status(201)
-        .json(todo);
-    }catch(error){
-        next(error);
-    }
-};
-
-exports.updateTodo = async(req,res,next)=>{
-    try{
-        const todo =
-        await todoService.updateTodo(
-            req.params.id,
-            req.body
-        );
-        if(!todo){
-            return res.status(404)
-            .json({
-                message:"Todo not found"
-            });
-        }
-        res.json(todo);
-    }catch(error){
-        next(error);
-    }
-};
-
-export const deleteTodo = async(req,res,next)=>{
+export const getAllTodos = async (req, res) => {
     try {
-        const todo = await todoService.deleteTodo(
-            req.params.id
-        );
+        const todos = await todoService.getAllTodos();
 
-        if(!todo){
-            return res.status(404)
-                .json({
-                    message:"Todo not found"
-                });
+        res.status(200).json(todos);
+
+    } catch (error) {
+        res.status(500).json({
+            message: error.message
+        });
+    }
+};
+
+export const getDoneTodos = async (req, res) => {
+    try {
+        const todosDone = await todoService.getDoneTodos();
+
+        res.status(200).json(todosDone);
+
+    } catch (error) {
+        res.status(500).json({
+            message: error.message
+        });
+    }
+};
+
+export const getOngoingTodos = async (req, res) => {
+    try {
+        const todos = await todoService.getOngoingTodos();
+
+        res.status(200).json(todos);
+
+    } catch (error) {
+        res.status(500).json({
+            message: error.message
+        });
+    }
+};
+
+export const updateTodoStatus = async (req, res) => {
+    try {
+        const id = Number(req.params.id);
+        const { isDone } = req.body;
+
+        const result = await todoService.updateTodoStatus(id, isDone);
+
+        if (result.matchedCount === 0) {
+            return res.status(404).json({
+                message: "Tâche introuvable"
+            });
+        }
+
+        res.status(200).json({
+            message: "Tâche mise à jour"
+        });
+
+    } catch (error) {
+        res.status(500).json({
+            message: error.message
+        });
+    }
+};
+
+export const updateTodoTitle = async (req, res) => {
+    try {
+        const id = Number(req.params.id);
+        const { title } = req.body;
+
+        const result = await todoService.updateTodoTitle(id, title);
+
+        if (result.matchedCount === 0) {
+            return res.status(404).json({
+                message: "Tâche introuvable"
+            });
+        }
+
+        res.status(200).json({
+            message: "Tâche mise à jour"
+        });
+
+    } catch (error) {
+        res.status(500).json({
+            message: error.message
+        });
+    }
+};
+
+export const updateTodoContent = async (req, res) => {
+    try {
+        const id = Number(req.params.id);
+        const { content } = req.body;
+
+        const result = await todoService.updateTodoContent(id, content);
+
+        if (result.matchedCount === 0) {
+            return res.status(404).json({
+                message: "Tâche introuvable"
+            });
+        }
+
+        res.status(200).json({
+            message: "Tâche mise à jour"
+        });
+
+    } catch (error) {
+        res.status(500).json({
+            message: error.message
+        });
+    }
+};
+
+export const deleteTodo = async (req, res) => {
+    try {
+        const id = Number(req.params.id);
+
+        const result = await todoService.deleteTodo(id);
+
+        if (result.deletedCount === 0) {
+            return res.status(404).json({
+                message: "Todo not found"
+            });
         }
 
         res.status(204).send();
 
-    } catch(error) {
-        next(error);
+    } catch (error) {
+        res.status(500).json({
+            message: error.message
+        });
+    }
+};
+
+export const createTodo = async (req, res) => {
+    try {
+        const { title, content } = req.body;
+
+        if (!title || !content) {
+            return res.status(400).json({
+                message: "Title and content are required"
+            });
+        }
+
+        const newTodo = await todoService.createTodo(title, content);
+
+        res.status(201).json({
+            message: "Todo created",
+            todo: newTodo
+        });
+
+    } catch (error) {
+        res.status(500).json({
+            message: error.message
+        });
     }
 };
