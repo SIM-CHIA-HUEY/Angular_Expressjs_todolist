@@ -24,21 +24,30 @@
                   <input type="checkbox" [checked]="todo.isDone" (change)="onCheckboxChange(todo._id.toString(), $event.target.checked)" class="checkbox"/>
                 </div>
                 <div class="column-title">
-                  <textarea rows="2" maxlength=50
-                    id="title" class="update-title" [(ngModel)]="todo.title"
-                  (keyup.enter)="onSubmitTitle(todo._id, todo.title)" (blur)="contentLostFocus()"></textarea>
+                  <textarea
+                    #titletextarea
+                    maxlength="50"
+                    class="update-title"
+                    [(ngModel)]="todo.title"
+                    (input)="autoResize(titletextarea)"
+                    (keydown.enter)="onSubmitTitle(todo._id, todo.title); $event.preventDefault()"
+                    (blur)="contentLostFocus()">
+                  </textarea>
                 </div>
                 <div class="column-icon">
                   <button (click)="deleteTodos(todo._id)" class="trash-button">
                     <i class="fa-solid fa-trash"></i>
                   </button>
                 </div>
-                <div class="column-content">
-                  <textarea rows="2" maxlength=100
-                    id="content" class="update-content" [(ngModel)]="todo.content"
-                  (keyup.enter)="onSubmitContent(todo._id, todo.content)" (blur)="contentLostFocus()"></textarea>
-                </div>
-                
+                  <textarea
+                    #contenttextarea
+                    maxlength="100"
+                    class="update-content"
+                    [(ngModel)]="todo.content"
+                    (input)="autoResize(contenttextarea)"
+                    (keydown.enter)="onSubmitContent(todo._id, todo.content); $event.preventDefault()"
+                    (blur)="contentLostFocus()">
+                  </textarea>
               </div>
             </li>
           }

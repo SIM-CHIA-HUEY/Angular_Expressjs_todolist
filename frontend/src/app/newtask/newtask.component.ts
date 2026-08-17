@@ -1,19 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { faPlus } from '@fortawesome/free-solid-svg-icons';
 
-// ----- API POST 2 : Add a to-do task with service, and in component : -----
 import { TodosService } from '../services/todos.service';
 import { TodoPayloadAddNew } from 'src/app/models/todo.model';
 import { ActivatedRoute } from '@angular/router';
-
-// -----  API POST 1 : Add a to-do task very simply without service, only in component with AXIOS : -----
-// import axios from "axios";
-
-// ----- Use Store + counters and actions files. Objective : to increment each time a todo task is added -----
-import { Observable } from 'rxjs';
-import { Store } from '@ngrx/store';
-
-import { sumAllTodos } from '../store/actions/counter.actions'
 
 @Component({
     selector: '.app-newtask',
@@ -22,10 +12,7 @@ import { sumAllTodos } from '../store/actions/counter.actions'
     standalone: false
 })
 export class NewtaskComponent implements OnInit {
-
-  // ----- STORE + reducers and actions files. Objective : to get final state's $count from the Store -----
-  // We initialize an empty variable here that'll stock the value from the Store : 
-  count$: Observable<number>;
+  todosCount: number = 0;
   form: any = {
     todoTitle: '',
     todoContent: ''
@@ -35,21 +22,15 @@ export class NewtaskComponent implements OnInit {
 
   constructor(
     private todosService: TodosService,
-    private route: ActivatedRoute,
-    private store: Store<{ count: number }>
+    private route: ActivatedRoute
     ) 
-    {
-      // ----- STORE : Use with SELECT + store + reducers and actions files. Objective : to get final state's $count from the Store -----
-      this.count$ = store.select('count'); 
-    }
+    {}
 
   ngOnInit(): void {
-    this.store.dispatch(sumAllTodos());
+    this.getTodosCount();
   }
 
-  // Add a to-do task with service :
   async submit () {
-    console.log("submit() called");
     if(this.isValidForm) {
       let body:TodoPayloadAddNew = {
         "title": this.form.todoTitle,
@@ -60,6 +41,13 @@ export class NewtaskComponent implements OnInit {
         console.log(response)
       )
     }
+  }
+
+  getTodosCount() {
+    this.todosService.getAllTodos().subscribe((results) => {
+      this.todosCount = results.length;
+      console.log("todosCount", this.todosCount);
+    });
   }
 
 }

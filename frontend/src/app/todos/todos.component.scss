@@ -175,15 +175,23 @@ ul {
   }
   
   textarea {
+    width: 100%;
+    min-height: 20px;
     resize: none;
+    overflow: hidden;
+    box-sizing: border-box;
   }
   .update-title {
+    width: 100%;
+    min-height: 0;
     font-size: medium;
     font-family: 'Roboto', sans-serif;
     font-weight: bolder;
     color: $base-ocean;
-    width: 100%;
     border: none;
+    resize: none;
+    overflow: hidden;
+    box-sizing: border-box;
   }
   .update-title:hover {
     border-bottom: solid $base-blue 1px;
@@ -195,10 +203,14 @@ ul {
   }
   
   .update-content {
+    width: 100%;
+    min-height: 0;
     font-size: medium;
     font-family: 'Roboto', sans-serif;
-    width: 80%;
     border: none;
+    resize: none;
+    overflow: hidden;
+    box-sizing: border-box;
   }
   .update-content:hover {
     border-bottom: solid $base-blue 1px;

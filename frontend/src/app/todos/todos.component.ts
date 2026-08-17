@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-// import axios from "axios";
-import { faTrash } from '@fortawesome/free-solid-svg-icons';
+import { afterNextRender, ElementRef, QueryList, ViewChildren } from '@angular/core';
 
 import { TodosService } from '../services/todos.service';
 import { ActivatedRoute } from '@angular/router';
@@ -17,11 +16,16 @@ export class TodosComponent implements OnInit {
 
   tab = 0;
   todosArray: TodoPayload[] = [];
+  @ViewChildren('titleTextarea')
+titleTextareas!: QueryList<ElementRef<HTMLTextAreaElement>>;
 
-  constructor(
+@ViewChildren('contentTextarea')
+contentTextareas!: QueryList<ElementRef<HTMLTextAreaElement>>;
+
+  constructor (
     private route: ActivatedRoute,
     private todosService: TodosService, 
-    ){}
+  ){}
 
   ngOnInit(): void {
     if (this.tab == 0) {
@@ -76,24 +80,38 @@ export class TodosComponent implements OnInit {
   getTodos() {
     this.todosService.getTodoTasks().subscribe((results) => {
       this.todosArray = results;
+
+      
     });
   }
 
   getDoneTasks() {
     this.todosService.getDoneTasks().subscribe((results) => {
       this.todosArray = results;
+
+      
     });
   }
 
 
-   getAllTodos() {
-    this.todosService.getAllTodos().subscribe(results => {
-      this.todosArray = results;
+  getAllTodos() {
+  this.todosService.getAllTodos().subscribe(results => {
+    this.todosArray = results;
+
+    afterNextRender(() => {
+      this.titleTextareas.forEach(textarea => {
+        this.autoResize(textarea.nativeElement);
+      });
+
+      this.contentTextareas.forEach(textarea => {
+        this.autoResize(textarea.nativeElement);
+      });
     });
-  }
+  });
+}
 
   onCheckboxChange(id: string, isDone: boolean) {
-    const body = {
+    const body: TodoPayloadUpdateStatus = {
       isDone: isDone
     };
     this.todosService.updateTodoStatus(id, body).subscribe({
@@ -138,11 +156,15 @@ export class TodosComponent implements OnInit {
     // BUG : when immediately clicked on another input, alert box loops over and over again
     // console.log("Don't forget to press on ENTER to save changes!")
   }
+
+  autoResize(textarea: HTMLTextAreaElement): void {
+    textarea.style.height = '0px';
+    textarea.style.height = `${textarea.scrollHeight}px`;
+}
   
   deleteTodos(id: string) {
     this.todosService.deleteTodos(id).subscribe(() => {
       this.refreshAfterChanges();
-      console.log("on delete", this.tab)
     });
   }
 }
