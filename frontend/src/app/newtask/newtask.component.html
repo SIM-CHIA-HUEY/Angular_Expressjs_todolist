@@ -15,7 +15,7 @@
             @if (todoTitle.invalid && (todoTitle.dirty || todoTitle.touched)) {
             <div
               class="danger-alert">
-              @if (todoTitle.errors?.['required']) {
+              @if (todoTitle.errors?.['required'] && this.submitted && !this.form.todoTitle) {
                 <div>
                   * To-do title is required if you want to add something.
                 </div>
@@ -35,7 +35,7 @@
           @if (todoContent.invalid && (todoContent.dirty || todoContent.touched)) {
             <div
               class="danger-alert">
-              @if (todoContent.errors?.['required']) {
+              @if (todoContent.errors?.['required'] && this.submitted && !this.form.todoContent) {
                 <div>
                   * To-do content is required if you want to add something.
                 </div>

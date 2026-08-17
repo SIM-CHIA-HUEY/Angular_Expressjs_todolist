@@ -47,6 +47,12 @@ contentTextareas!: QueryList<ElementRef<HTMLTextAreaElement>>;
       this.tab = 3;
       this.getAllTodos();
     }
+
+    this.todosService.todoCreated$.subscribe({
+      next: (todo) => {
+        this.todosArray.push(todo);
+      }
+    });
    }
 
   changeTab(index: number) {

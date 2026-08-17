@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
-import { TodoPayloadAddNew, TodoPayloadUpdateContent, TodoPayloadUpdateStatus, TodoPayloadUpdateTitle } from '../models/todo.model';
+import { Subject, Observable } from 'rxjs';
+import { TodoPayload, TodoPayloadAddNew, TodoPayloadUpdateContent, TodoPayloadUpdateStatus, TodoPayloadUpdateTitle } from '../models/todo.model';
 
 @Injectable({
   providedIn: 'root'
@@ -11,6 +11,10 @@ export class TodosService {
   constructor(private http: HttpClient) { }
 
   private baseURL = `http://localhost:3001`
+
+  private todoCreatedSubject = new Subject<TodoPayload>();
+
+  todoCreated$ = this.todoCreatedSubject.asObservable();
 
   // Todos
   getAllTodos(): Observable<any> {
@@ -47,6 +51,10 @@ export class TodosService {
 
   updateTodoContent(id: string, body: TodoPayloadUpdateContent): Observable<any> {
     return this.http.patch(`${this.baseURL}/todos/${id}/content`, body) as Observable<any>;
+  }
+
+  notifyTodoCreated(todo: TodoPayload) {
+    this.todoCreatedSubject.next(todo);
   }
 
 }

@@ -19,6 +19,7 @@ export class NewtaskComponent implements OnInit {
   };
   isValidForm = true;
   faPlus = faPlus ;
+  submitted = false;
 
   constructor(
     private todosService: TodosService,
@@ -31,22 +32,38 @@ export class NewtaskComponent implements OnInit {
   }
 
   async submit () {
+    this.submitted = true;
+
+    if (!this.form.todoTitle || !this.form.todoContent) {
+      return;
+    }
+
     if(this.isValidForm) {
       let body:TodoPayloadAddNew = {
         "title": this.form.todoTitle,
         "content": this.form.todoContent,
         "isDone": false
       }
-      this.todosService.addTodo(body).subscribe(response =>
-        console.log(response)
-      )
+      this.todosService.addTodo(body).subscribe({
+        next: (response) => {
+          this.todosService.notifyTodoCreated(response.todo);
+          // vider le formulaire
+          this.form.todoTitle = '';
+          this.form.todoContent = '';
+          this.submitted = false;
+        },
+        error: (error) => {
+          console.error(error);
+        }
+      });
     }
+
+    this.todosCount = this.todosCount + 1;
   }
 
   getTodosCount() {
     this.todosService.getAllTodos().subscribe((results) => {
       this.todosCount = results.length;
-      console.log("todosCount", this.todosCount);
     });
   }
 
