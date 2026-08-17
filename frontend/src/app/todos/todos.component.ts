@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, AfterViewInit, ViewChild } from '@angular/core';
 import { afterNextRender, ElementRef, QueryList, ViewChildren } from '@angular/core';
 
 import { TodosService } from '../services/todos.service';
@@ -16,11 +16,12 @@ export class TodosComponent implements OnInit {
 
   tab = 0;
   todosArray: TodoPayload[] = [];
-  @ViewChildren('titleTextarea')
-titleTextareas!: QueryList<ElementRef<HTMLTextAreaElement>>;
 
-@ViewChildren('contentTextarea')
-contentTextareas!: QueryList<ElementRef<HTMLTextAreaElement>>;
+  @ViewChildren('titletextarea')
+  titleTextareas!: QueryList<ElementRef<HTMLTextAreaElement>>;
+
+  @ViewChildren('contenttextarea')
+  contentTextareas!: QueryList<ElementRef<HTMLTextAreaElement>>;
 
   constructor (
     private route: ActivatedRoute,
@@ -104,15 +105,15 @@ contentTextareas!: QueryList<ElementRef<HTMLTextAreaElement>>;
   this.todosService.getAllTodos().subscribe(results => {
     this.todosArray = results;
 
-    afterNextRender(() => {
+    setTimeout(() => {
       this.titleTextareas.forEach(textarea => {
         this.autoResize(textarea.nativeElement);
       });
-
       this.contentTextareas.forEach(textarea => {
         this.autoResize(textarea.nativeElement);
       });
-    });
+    }, 0);
+    
   });
 }
 
@@ -166,6 +167,7 @@ contentTextareas!: QueryList<ElementRef<HTMLTextAreaElement>>;
   autoResize(textarea: HTMLTextAreaElement): void {
     textarea.style.height = '0px';
     textarea.style.height = `${textarea.scrollHeight}px`;
+    console.log("scrollHeight", textarea.scrollHeight)
 }
   
   deleteTodos(id: string) {
