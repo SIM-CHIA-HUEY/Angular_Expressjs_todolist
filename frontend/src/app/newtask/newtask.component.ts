@@ -1,10 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { faPlus } from '@fortawesome/free-solid-svg-icons';
+import { NgForm } from '@angular/forms';
 
 import { TodosService } from '../services/todos.service';
 import { TodoPayloadAddNew } from 'src/app/models/todo.model';
 import { ActivatedRoute } from '@angular/router';
-
 @Component({
     selector: '.app-newtask',
     templateUrl: './newtask.component.html',
@@ -12,6 +12,7 @@ import { ActivatedRoute } from '@angular/router';
     standalone: false
 })
 export class NewtaskComponent implements OnInit {
+  @ViewChild('myForm') myForm!: NgForm;
   todosArray: any[] = [];
   todosCount$ = this.todosService.todosCount$;
 
@@ -51,8 +52,10 @@ export class NewtaskComponent implements OnInit {
           this.todosService.incrementTodosCount();
           this.todosService.notifyTodoCreated(response.todo);
           // vider le formulaire
-          this.form.todoTitle = '';
-          this.form.todoContent = '';
+          this.myForm.resetForm({
+            todoTitle: '',
+            todoContent: ''
+          });
           this.submitted = false;
         },
         error: (error) => {

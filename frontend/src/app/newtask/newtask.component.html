@@ -1,58 +1,54 @@
-<div class="container">
-  <h3>New Task</h3>
+<!-- <div class="container"> -->
+<div class="m-0 max-w-[100vw] p-0">
+  <h3 class="mb-[20px] font-extrabold">New Task</h3>
 
 
   <div class="col-sm submit-form">
     <form  #myForm="ngForm" (ngSubmit)="submit()">
 
-      <div class="form-group" >
+      <div>
         <div>
-          <input type="text" class="title-textarea" id="todoTitle" name="todoTitle" value={todoTitle}
-            placeholder="Title : Be concise, max 50 characters"
+          <label for="task-title">Title</label>
+          <input type="text" 
+            id="todoTitle" name="todoTitle" value={todoTitle}
+            class="border border-default-medium rounded-4xl
+            w-[100%] h-[50px] px-[15px] mb-[10px] 
+            text-brand-violet text-sm"
+            placeholder="Be concise, max 50 characters"
             required minlength="1" maxlength="50"
             [(ngModel)]="form.todoTitle" #todoTitle="ngModel">
-            <!-- Title Validations error messages -->
-            @if (todoTitle.invalid && (todoTitle.dirty || todoTitle.touched)) {
-            <div
-              class="danger-alert">
-              @if (todoTitle.errors?.['required'] && this.submitted && !this.form.todoTitle) {
-                <div>
+          <!-- Title Validations error messages --> 
+            @if (todoTitle.invalid && (todoTitle.touched || submitted)) {
+              @if (todoTitle.errors?.['required']) {
+                <div class="text-[#E4264E] text-sm mb-[10px]">
                   * To-do title is required if you want to add something.
                 </div>
-              }
-              @if (todoTitle.errors?.['maxlength']) {
-                <div>
-                  * To-do title must be at most 50 characters to be efficient.
-                </div>
-              }
-            </div>
+              }            
           }
-          <input type="text" class="content-textarea" id="todoContent" name="todoContent" value={todoContent}
-            placeholder="Content : Be concise, max 100 characters"
+          <label for="task-content">Content</label>
+          <input type="text"
+            id="todoContent" name="todoContent" value={todoContent}
+            class="border border-default-medium rounded-4xl
+            w-[100%] h-[50px] px-[15px] mb-[10px] 
+            text-brand-violet text-sm" 
+            placeholder="Be concise, max 100 characters"
             required minlength="1" maxlength="100"
             [(ngModel)]="form.todoContent" #todoContent="ngModel">
           <!-- Content Validations error messages -->
           @if (todoContent.invalid && (todoContent.dirty || todoContent.touched)) {
-            <div
-              class="danger-alert">
-              @if (todoContent.errors?.['required'] && this.submitted && !this.form.todoContent) {
-                <div>
+              @if (todoContent.errors?.['required'] && !this.form.todoContent) {
+                <div class="text-[#E4264E] text-sm mb-[10px]">
                   * To-do content is required if you want to add something.
                 </div>
               }
-              @if (todoContent.errors?.['maxlength']) {
-                <div>
-                  * To-do content must be at most 100 characters to be efficient.
-                </div>
-              }
-            </div>
           }
-
         </div>
       </div>
 
-      <div class="form-buttons">
-        <button type="button" (click)="submit()" class="button-plus" [disabled]="!myForm.valid">
+      <div class="mt-[30px]">
+        <button type="button" (click)="submit()" 
+        class="block w-full px-[50px] py-[10px] bg-brand-violet rounded-[5px] text-white text-base font-bold cursor-pointer" 
+        [disabled]="!myForm.valid">
           <i class="fa-solid fa-plus"></i> Add
         </button>
       </div>
@@ -60,11 +56,13 @@
     </form>
   </div>
 
-  <div class="new-task-image">
-    <img src="assets/7203333_todo_list_deadline_task_icon.png" class="illustration" alt="new-task-illustration"/>
+  <div class="justify-items-center">
+    <img src="assets/7203333_todo_list_deadline_task_icon.png" 
+    class="block pt-[100px] mx-auto" 
+    alt="new-task-illustration"/>
   </div>
 
-  <div class="text-add-task">
+  <div class="text-center p-[10px]">
     Total tasks registered : {{ todosCount$ | async }}
   </div>
 

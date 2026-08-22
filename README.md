@@ -22,9 +22,13 @@ npm install
 ```
 ng serve --open
 ```
-- About build
+- About building the front-end application
 ```
 ng build
+```
+Then 
+```
+npx serve -s dist/frontend/browser
 ```
 But before opening it on browser, you might make some changes on _dist/frontend/index.html_ first :
 At line 4,
