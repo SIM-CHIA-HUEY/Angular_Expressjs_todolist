@@ -16,6 +16,13 @@ export class TodosComponent implements OnInit {
 
   tab = 0;
   todosArray: TodoPayload[] = [];
+  tabs = [
+    { id: 3, label: 'ALL' },
+    { id: 1, label: 'TO-DO' },
+    { id: 2, label: 'DONE' }
+  ];
+  savedTitleId: number | null = null;
+  savedContentId: number | null = null;
 
   @ViewChildren('titletextarea')
   titleTextareas!: QueryList<ElementRef<HTMLTextAreaElement>>;
@@ -34,21 +41,6 @@ export class TodosComponent implements OnInit {
       this.getAllTodos();
     }
 
-    if (this.tab == 1) {
-      this.tab = 1;
-      this.getTodos();
-    }
-
-    if (this.tab == 2) {
-      this.tab = 2;
-      this.getDoneTasks();
-    }
-
-    if (this.tab == 3) {
-      this.tab = 3;
-      this.getAllTodos();
-    }
-
     this.todosService.todoCreated$.subscribe({
       next: (todo) => {
         this.todosArray.push(todo);
@@ -61,6 +53,8 @@ export class TodosComponent implements OnInit {
       // Tab 1 : get the on-going to-dos list
       case 1 :
           this.tab = 1;
+          console.log("tab", this.tab)
+          console.log("index", index)
           this.getTodos();
           // console.log("originally", this.tab)
 
@@ -117,7 +111,7 @@ export class TodosComponent implements OnInit {
   });
 }
 
-  onCheckboxChange(id: string, isDone: boolean) {
+  onCheckboxChange(id: number, isDone: boolean) {
     const body: TodoPayloadUpdateStatus = {
       isDone: isDone
     };
@@ -145,18 +139,27 @@ export class TodosComponent implements OnInit {
     }
   }
 
-  onSubmitTitle(id: string, title: string) {
+  onSubmitTitle(id: number, title: string) {
     let body: TodoPayloadUpdateTitle = {
       "title": title,
     }
-    this.todosService.updateTodoTitle(id, body).subscribe();
+    this.todosService.updateTodoTitle(id, { title }).subscribe({
+      next: () => {
+        this.savedTitleId = id;
+      }
+    });
   }
 
-  onSubmitContent(id: string, content: string) {
+  onSubmitContent(id: number, content: string) {
     let body: TodoPayloadUpdateContent = {
       "content": content,
     }
-    this.todosService.updateTodoContent(id, body).subscribe();
+    // this.todosService.updateTodoContent(id, body).subscribe();
+    this.todosService.updateTodoContent(id, { content }).subscribe({
+      next: () => {
+        this.savedContentId = id;
+      }
+    });
   }
 
   contentLostFocus() {
@@ -169,7 +172,7 @@ export class TodosComponent implements OnInit {
     textarea.style.height = `${textarea.scrollHeight}px`;
 }
   
-  deleteTodos(id: string) {
+  deleteTodos(id: number) {
     this.todosService.deleteTodos(id).subscribe(() => {
       this.refreshAfterChanges();
       this.todosService.decrementTodosCount();

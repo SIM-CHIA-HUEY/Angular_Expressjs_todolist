@@ -1,60 +1,126 @@
-<div class="container">
-  <h3>Tasks List</h3>
-
-  <div class="tabs">
-    <div class="index">
-      <div tabindex="0" role="tab"
-        (click)="changeTab(3)" (keyup.enter)="tab=3"
-      [ngClass]="{active: tab===3}" class="tab-button">ALL</div>
-      <div tabindex="0" role="tab"
-        (click)="changeTab(1)" (keyup.enter)="tab=1"
-      [ngClass]="{active: tab===1}" class="tab-button">TO-DO</div>
-      <div tabindex="0" role="tab"
-        (click)="changeTab(2)" (keyup.enter)="tab=2"
-      [ngClass]="{active: tab===2}" class="tab-button">DONE</div>
-    </div>
-
-    <div class="contents">
-      <div>        
-        <ul>
-          @for (todo of todosArray; track todo._id; let i = $index) {
-            <li>
-              <div class="row">
-                <div class="column-icon">
-                  <input type="checkbox" [checked]="todo.isDone" (change)="onCheckboxChange(todo._id.toString(), $event.target.checked)" class="checkbox"/>
-                </div>
-                <div class="column-title">
-                  <textarea
-                    #titletextarea
-                    maxlength="50"
-                    class="update-title"
-                    [(ngModel)]="todo.title"
-                    (input)="autoResize(titletextarea)"
-                    (keydown.enter)="onSubmitTitle(todo._id, todo.title); $event.preventDefault()"
-                    (blur)="contentLostFocus()">
-                  </textarea>
-                </div>
-                <div class="column-icon">
-                  <button (click)="deleteTodos(todo._id)" class="trash-button">
-                    <i class="fa-solid fa-trash"></i>
-                  </button>
-                </div>
-                  <textarea
-                    #contenttextarea
-                    maxlength="100"
-                    class="update-content"
-                    [(ngModel)]="todo.content"
-                    (input)="autoResize(contenttextarea)"
-                    (keydown.enter)="onSubmitContent(todo._id, todo.content); $event.preventDefault()"
-                    (blur)="contentLostFocus()">
-                  </textarea>
-              </div>
-            </li>
-          }
-        </ul>
+<div class="m-0 max-w-[100vw] p-0">
+  <h3 class="mb-[20px] font-extrabold text-3xl">Tasks List</h3>
+  
+  <div class="flex">
+    @for (item of tabs; track item.id) {
+      <div
+        tabindex="0"
+        role="tab"
+        (click)="changeTab(item.id)"
+        (keyup.enter)="changeTab(item.id)"
+        [ngClass]="tab === item.id
+        ? 'border-0 bg-white text-base font-bold text-brand-blue pr-[50px] pb-[10px] border-b-4 border-brand-blue cursor-pointer'
+        : 'border-0 bg-white text-base font-bold text-brand-silver pr-[50px] pb-[10px] border-b-2 border-brand-silver cursor-pointer'"
+      >
+        {{ item.label }}
       </div>
-
-    </div>
+    }
   </div>
+
+    <div>        
+      <ul>
+        @for (todo of todosArray; track todo._id; let i = $index) {
+          <li>
+            <div class="w-full m-[20px_20px_20px_0] pb-5 border-b-[1px] border-default-medium">
+              <div class="flex justify-between mb-[10px]">
+              <div class="w-[34px]">
+                <input type="checkbox" [checked]="todo.isDone" (change)="onCheckboxChange(todo._id, $event.target.checked)" 
+                class="appearance-none
+                w-5 h-5
+                m-0
+                cursor-pointer
+                font-sans
+                rounded-[5px]
+                border-2 border-brand-blue
+                bg-brand-snow
+                hover:border-[3px]
+                checked:bg-brand-blue
+                checked:border-brand-blue
+                checked:after:content-['✓']
+                checked:after:flex
+                checked:after:items-center
+                checked:after:justify-center
+                checked:after:h-full
+                checked:after:text-brand-snow
+                checked:after:text-sm
+                checked:after:font-bold"/>
+              </div>
+              <div class="w-full">
+                <textarea
+                  #titletextarea
+                  maxlength="50"
+                  [class.title-active]="savedTitleId === todo._id"      
+                  class="w-full
+                  h-[4.5rem]
+                  font-extrabold
+                  text-brand-ocean
+                  resize-none
+                  hover:border-b-[1px]
+                  hover:border-brand-blue
+                  focus:outline-none
+                  focus:border-b-[1px]
+                  focus:border-brand-blue
+                  focus:text-brand-blue"
+                  [(ngModel)]="todo.title"
+                  (input)="autoResize(titletextarea)"
+                  (keydown.enter)="onSubmitTitle(todo._id, todo.title); $event.preventDefault()"
+                  (blur)="contentLostFocus()">
+                </textarea>
+              </div>
+              <div class="column-icon">
+                <button (click)="deleteTodos(todo._id)" 
+                class="border-solid border rounded-md border-brand-yellow
+                align-middle float-right p-2 text-brand-yellow cursor-pointer 
+                relative
+                overflow-hidden
+                bg-white
+                text-brand-yellow
+                before:absolute
+                before:inset-0
+                before:bg-brand-yellow
+                before:-translate-x-full
+                before:transition-transform
+                before:duration-200
+                before:ease-out
+                hover:before:translate-x-0">
+                  <i class="relative
+                  z-10
+                  text-brand-yellow
+                  transition-colors
+                  duration-200
+                  group-hover:text-white
+                  fa-solid
+                  fa-trash"></i>
+                </button>
+              </div>
+              </div>
+                <textarea
+                  #contenttextarea
+                  maxlength="100"
+                  [class.content-active]="savedContentId === todo._id"      
+                  class="w-full
+                  h-[5.7rem]
+                  resize-none
+                  bg-[#e8e8e8]
+                  p-[10px]
+                  rounded-[10px]
+                  hover:border-b-[1px]
+                  hover:border-brand-blue
+                  focus:outline-none
+                  focus:border-b-[1px]
+                  focus:border-brand-blue
+                  focus:text-brand-blue"
+                  [(ngModel)]="todo.content"
+                  (input)="autoResize(contenttextarea)"
+                  (keydown.enter)="onSubmitContent(todo._id, todo.content); $event.preventDefault()"
+                  (blur)="contentLostFocus()">
+                </textarea>
+            </div>
+          </li>
+        }
+      </ul>
+  </div>
+
+  
 
 </div>

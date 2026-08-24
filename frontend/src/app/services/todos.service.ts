@@ -25,7 +25,7 @@ export class TodosService {
     return this.http.get(`${this.baseURL}/todos`) as Observable<any>;
   }
 
-  getTodoById(id: string): Observable<any> {
+  getTodoById(id: number): Observable<any> {
     return this.http.get(`${this.baseURL}/todos/${id}`) as Observable<any>;
   }
 
@@ -41,19 +41,19 @@ export class TodosService {
     return this.http.post(`${this.baseURL}/todos`, data) as Observable<any>;
   }
 
-  deleteTodos(id: string): Observable<any> {
+  deleteTodos(id: number): Observable<any> {
     return this.http.delete(`${this.baseURL}/todos/${id}`) as Observable<any>;
   }
 
-  updateTodoStatus(id: string, body: TodoPayloadUpdateStatus): Observable<any> {
+  updateTodoStatus(id: number, body: TodoPayloadUpdateStatus): Observable<any> {
     return this.http.patch(`${this.baseURL}/todos/${id}`, body) as Observable<any>;
   }
 
-  updateTodoTitle(id: string, body: TodoPayloadUpdateTitle): Observable<any> {
+  updateTodoTitle(id: number, body: TodoPayloadUpdateTitle): Observable<any> {
     return this.http.patch(`${this.baseURL}/todos/${id}/title`, body) as Observable<any>;
   }
 
-  updateTodoContent(id: string, body: TodoPayloadUpdateContent): Observable<any> {
+  updateTodoContent(id: number, body: TodoPayloadUpdateContent): Observable<any> {
     return this.http.patch(`${this.baseURL}/todos/${id}/content`, body) as Observable<any>;
   }
 
