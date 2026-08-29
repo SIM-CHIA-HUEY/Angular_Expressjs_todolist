@@ -43,7 +43,9 @@ export class TodosComponent implements OnInit {
 
     this.todosService.todoCreated$.subscribe({
       next: (todo) => {
-        this.todosArray.push(todo);
+        if(this.tab ===3 || this.tab === 1) {
+          this.todosArray.push(todo);
+        }
       }
     });
    }

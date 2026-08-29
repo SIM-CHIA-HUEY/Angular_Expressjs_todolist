@@ -7,3 +7,35 @@
 .content-active {
   color: black !important;
 }
+
+// --- Animation for the trash button : for future reference ---
+  // .trash-button {
+  //   border-style: solid;
+  //   border-width: 1px;
+  //   border-radius: 5px;
+  //   border-color: $base-yellow;
+  //   padding: 5px 10px;
+  //   vertical-align: middle;
+  //   float: right !important;
+  //   color: $base-yellow;
+  //   cursor: pointer;
+  //   background: linear-gradient(to right, $base-yellow 50%, $color-snow 50%);
+  //   background-size: 200% 100%;
+  //   background-position: right bottom;
+  //   transition: all .2s ease-out;
+  // }
+  
+  // .trash-button:hover {
+  //   color: $color-snow;
+  //   background-position: left bottom;
+  //   border-color: $base-yellow;
+  //   transition: all .2s ease;
+  //   border-width: 2px;
+  // }
+  
+  // .row:hover .trash-button {
+  //   color: $color-snow;
+  //   background-position: left bottom;
+  //   border-color: $base-yellow;
+  //   transition: all .2s ease;
+  // }
